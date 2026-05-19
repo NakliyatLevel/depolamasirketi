@@ -280,7 +280,7 @@ export default function HeroSection({ settings }: HeroSectionProps) {
               <form onSubmit={handleHeroSubmit} className="mt-6 space-y-4">
                 <div>
                   <label className="block text-sm font-medium text-foreground mb-2">Ev Tipi</label>
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                  <div className="grid grid-cols-3 gap-2">
                     {heroRoomOptions.map((option) => (
                       <button
                         key={option.value}
