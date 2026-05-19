@@ -11,12 +11,21 @@ type PostalAddress = {
   addressCountry: string
 }
 
-function getSiteUrl(raw?: string | null): string {
-  if (!raw || raw.trim().length === 0) {
-    return process.env.NEXT_PUBLIC_SITE_URL || 'https://depolamasirketi.com.tr'
+const FALLBACK_DOMAIN = process.env.NEXT_PUBLIC_SITE_URL || process.env.SITE_URL || 'https://depolamasirketi.com.tr'
+
+function normalizeDomain(raw?: string | null) {
+  if (!raw) return FALLBACK_DOMAIN
+  const trimmed = raw.trim()
+  if (!trimmed) return FALLBACK_DOMAIN
+  const withoutProto = trimmed.replace(/^https?:\/\//, '')
+  if (withoutProto.startsWith('localhost')) {
+    return FALLBACK_DOMAIN
   }
-  const hasProtocol = raw.startsWith('http://') || raw.startsWith('https://')
-  return hasProtocol ? raw : `https://${raw.replace(/^https?:\/\//, '')}`
+  return `https://${withoutProto}`
+}
+
+function getSiteUrl(raw?: string | null): string {
+  return normalizeDomain(raw)
 }
 
 function buildBusinessBase(settings: SettingsMap = {}) {
