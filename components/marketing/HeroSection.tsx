@@ -29,6 +29,11 @@ export default function HeroSection({ settings }: HeroSectionProps) {
   const [heroSubmitMessage, setHeroSubmitMessage] = useState('')
 
   const cities = ['İstanbul', 'Ankara', 'İzmir', 'Bursa', 'Antalya']
+  const heroRoomOptions = [
+    { value: '1+1', label: '1+1 - 15 M3' },
+    { value: '2+1', label: '2+1 - 20 M3' },
+    { value: '3+1', label: '3+1 - 25 M3' },
+  ]
 
   useEffect(() => {
     const cityTimer = setInterval(() => {
@@ -272,20 +277,20 @@ export default function HeroSection({ settings }: HeroSectionProps) {
               <form onSubmit={handleHeroSubmit} className="mt-6 space-y-4 flex-1">
                 <div>
                   <label className="block text-sm font-medium text-foreground mb-2">Ev Tipi</label>
-                  <div className="grid grid-cols-5 gap-2">
-                    {['1+0', '1+1', '2+1', '3+1', '4+1'].map((t) => (
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                    {heroRoomOptions.map((option) => (
                       <button
-                        key={t}
+                        key={option.value}
                         type="button"
-                        onClick={() => setHeroForm((p) => ({ ...p, roomType: t }))}
+                        onClick={() => setHeroForm((p) => ({ ...p, roomType: option.value }))}
                         className={
                           `h-10 rounded-md border text-sm font-medium transition-colors ` +
-                          (heroForm.roomType === t
+                          (heroForm.roomType === option.value
                             ? 'bg-primary text-primary-foreground border-primary'
                             : 'bg-white text-foreground border-border hover:bg-muted')
                         }
                       >
-                        {t}
+                        {option.label}
                       </button>
                     ))}
                   </div>
