@@ -11,21 +11,21 @@ import {
 interface HeroQuickQuoteEmailProps {
   fullName: string
   phone: string
-  fromCity: string
-  toCity: string
   roomType: string
   priceMin?: number
   priceMax?: number
+  fromCity?: string
+  toCity?: string
 }
 
 export default function HeroQuickQuoteEmail({
   fullName,
   phone,
-  fromCity,
-  toCity,
   roomType,
   priceMin,
   priceMax,
+  fromCity,
+  toCity,
 }: HeroQuickQuoteEmailProps) {
   const formattedPrice =
     typeof priceMin === 'number' && typeof priceMax === 'number'
@@ -50,13 +50,21 @@ export default function HeroQuickQuoteEmail({
 
             <Hr style={hr} />
 
-            <Text style={label}>Nereden:</Text>
-            <Text style={value}>{fromCity}</Text>
+            {fromCity && (
+              <>
+                <Text style={label}>İletilen Not (Nereden):</Text>
+                <Text style={value}>{fromCity}</Text>
+              </>
+            )}
 
-            <Text style={label}>Nereye:</Text>
-            <Text style={value}>{toCity}</Text>
+            {toCity && (
+              <>
+                <Text style={label}>İletilen Not (Nereye):</Text>
+                <Text style={value}>{toCity}</Text>
+              </>
+            )}
 
-            <Text style={label}>Ev Tipi:</Text>
+            <Text style={label}>Talep Edilen Paket:</Text>
             <Text style={value}>{roomType}</Text>
 
             {formattedPrice && (
@@ -65,6 +73,12 @@ export default function HeroQuickQuoteEmail({
                 <Text style={value}>{formattedPrice}</Text>
               </>
             )}
+
+            <Hr style={hr} />
+
+            <Text style={label}>Sabit Uyarı</Text>
+            <Text style={value}>Evden Depoya Taşıma: 1+1 35.000 TL · 2+1 45.000 TL · 3+1 60.000 TL</Text>
+            <Text style={value}>Şehirlerarası paketler 35.000 TL'den başlar.</Text>
 
             <Hr style={hr} />
 
