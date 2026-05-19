@@ -11,15 +11,15 @@ type PostalAddress = {
   addressCountry: string
 }
 
-const FALLBACK_DOMAIN = process.env.NEXT_PUBLIC_SITE_URL || process.env.SITE_URL || 'https://depolamasirketi.com.tr'
+const PRODUCTION_DOMAIN = 'https://depolamasirketi.com.tr'
+const ENV_DOMAIN = process.env.NEXT_PUBLIC_SITE_URL || process.env.SITE_URL || ''
+const FALLBACK_DOMAIN = ENV_DOMAIN && !ENV_DOMAIN.includes('localhost') ? ENV_DOMAIN : PRODUCTION_DOMAIN
 
 function normalizeDomain(raw?: string | null) {
-  if (!raw) return FALLBACK_DOMAIN
-  const trimmed = raw.trim()
-  if (!trimmed) return FALLBACK_DOMAIN
-  const withoutProto = trimmed.replace(/^https?:\/\//, '')
+  const candidate = raw && raw.trim().length ? raw.trim() : FALLBACK_DOMAIN
+  const withoutProto = candidate.replace(/^https?:\/\//, '')
   if (withoutProto.startsWith('localhost')) {
-    return FALLBACK_DOMAIN
+    return PRODUCTION_DOMAIN
   }
   return `https://${withoutProto}`
 }
@@ -42,15 +42,13 @@ function buildBusinessBase(settings: SettingsMap = {}) {
       addressCountry: settings.address_country || settings.country || 'TR',
     }
 
-    if (settings.address_locality || settings.city) {
-      address.addressLocality = settings.address_locality || settings.city || undefined
-    }
-    if (settings.address_region) {
-      address.addressRegion = settings.address_region
-    }
-    if (settings.address_postal_code || settings.postal_code) {
-      address.postalCode = settings.address_postal_code || settings.postal_code || undefined
-    }
+    const fallbackLocality = settings.address_locality || settings.city || 'İstanbul'
+    const fallbackPostal = settings.address_postal_code || settings.postal_code || '34394'
+    const fallbackRegion = settings.address_region || 'İstanbul'
+
+    address.addressLocality = fallbackLocality
+    address.postalCode = fallbackPostal
+    address.addressRegion = fallbackRegion
   }
 
   return {
