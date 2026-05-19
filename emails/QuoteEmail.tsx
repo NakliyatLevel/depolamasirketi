@@ -47,28 +47,22 @@ export default function QuoteEmail({ name, email, phone, type, details = {}, pri
             <Hr style={hr} />
 
             <Section>
-              <Text style={sectionTitle}>Taşınma Bilgileri</Text>
+              <Text style={sectionTitle}>Depolama Bilgileri</Text>
               {details.preferredDate && (
                 <>
                   <Text style={label}>Tercih Edilen Tarih</Text>
                   <Text style={value}>{details.preferredDate}</Text>
                 </>
               )}
-              <Text style={label}>Nereden</Text>
+              <Text style={label}>Teslim Alınacak Adres</Text>
               <Text style={value}>{details.fromAddress || '-'}</Text>
-              <Text style={label}>Nereye</Text>
-              <Text style={value}>{details.toAddress || '-'}</Text>
-              <Text style={label}>Konut Tipi</Text>
-              <Text style={value}>{details.propertyType || '-'}</Text>
               <Text style={label}>Oda / Eşya</Text>
               <Text style={value}>
                 {details.rooms || '-'} oda · {details.furnitureCount || '-'} eşya
               </Text>
-              <Text style={label}>Mesafe</Text>
-              <Text style={value}>{details.distance ? `${details.distance} km` : '-'}</Text>
               <Text style={label}>Kat &amp; Asansör</Text>
               <Text style={value}>
-                Çıkış: {details.fromFloor || '-'} / {boolLabel(details.fromElevator)} · Varış: {details.toFloor || '-'} / {boolLabel(details.toElevator)}
+                {details.fromFloor || '-'}. Kat · Asansör: {boolLabel(details.fromElevator)}
               </Text>
             </Section>
 
@@ -92,8 +86,6 @@ export default function QuoteEmail({ name, email, phone, type, details = {}, pri
               <Text style={value}>{boolLabel(details.needsPacking)}</Text>
               <Text style={label}>Sökme - Takma</Text>
               <Text style={value}>{boolLabel(details.needsDisassembly)}</Text>
-              <Text style={label}>Depolama</Text>
-              <Text style={value}>{boolLabel(details.needsStorage)}</Text>
               <Text style={label}>Sigorta</Text>
               <Text style={value}>{boolLabel(details.needsInsurance)}</Text>
             </Section>

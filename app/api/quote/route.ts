@@ -6,6 +6,12 @@ export async function POST(request: Request) {
   try {
     const body = await request.json()
 
+    const sanitizedToAddress = body.toAddress ?? ''
+    const sanitizedToFloor = body.toFloor ? parseInt(body.toFloor) : 0
+    const sanitizedToElevator = body.toElevator ?? false
+    const sanitizedDistance = body.distance ? parseFloat(body.distance) : null
+    const sanitizedPropertyType = body.propertyType || 'storage'
+
     // Teklif talebini veritabanına kaydet
     const quote = await prisma.quote.create({
       data: {
@@ -16,11 +22,11 @@ export async function POST(request: Request) {
         fromAddress: body.fromAddress,
         fromFloor: parseInt(body.fromFloor),
         fromElevator: body.fromElevator,
-        toAddress: body.toAddress,
-        toFloor: parseInt(body.toFloor),
-        toElevator: body.toElevator,
-        distance: body.distance ? parseFloat(body.distance) : null,
-        propertyType: body.propertyType,
+        toAddress: sanitizedToAddress,
+        toFloor: sanitizedToFloor,
+        toElevator: sanitizedToElevator,
+        distance: sanitizedDistance,
+        propertyType: sanitizedPropertyType,
         rooms: parseInt(body.rooms),
         furnitureCount: parseInt(body.furnitureCount),
         hasFragileItems: body.hasFragileItems,
@@ -29,7 +35,7 @@ export async function POST(request: Request) {
         specialItems: body.specialItems || null,
         needsPacking: body.needsPacking,
         needsDisassembly: body.needsDisassembly,
-        needsStorage: body.needsStorage,
+        needsStorage: body.needsStorage ?? true,
         needsInsurance: body.needsInsurance,
         additionalNotes: body.additionalNotes || null,
         status: 'pending',
@@ -47,11 +53,6 @@ export async function POST(request: Request) {
           fromAddress: body.fromAddress,
           fromFloor: body.fromFloor,
           fromElevator: body.fromElevator,
-          toAddress: body.toAddress,
-          toFloor: body.toFloor,
-          toElevator: body.toElevator,
-          distance: body.distance,
-          propertyType: body.propertyType,
           rooms: body.rooms,
           furnitureCount: body.furnitureCount,
           hasFragileItems: body.hasFragileItems,
@@ -60,7 +61,6 @@ export async function POST(request: Request) {
           specialItems: body.specialItems,
           needsPacking: body.needsPacking,
           needsDisassembly: body.needsDisassembly,
-          needsStorage: body.needsStorage,
           needsInsurance: body.needsInsurance,
           additionalNotes: body.additionalNotes,
         },
