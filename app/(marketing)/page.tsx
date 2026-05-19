@@ -124,14 +124,15 @@ const sanitizePhone = (phone?: string) => phone?.toString().trim() || ''
 
 const getPhoneHref = (phone?: string) => {
   const raw = sanitizePhone(phone)
-  if (!raw) return 'tel:4446502'
+  if (!raw) return null
   const digits = raw.replace(/[^0-9+]/g, '')
+  if (!digits) return null
   return `tel:${digits}`
 }
 
 const formatPhoneDisplay = (phone?: string) => {
   const raw = sanitizePhone(phone)
-  if (!raw) return '444 65 02'
+  if (!raw) return ''
   let digits = raw.replace(/\D/g, '')
 
   if (digits.startsWith('90') && digits.length >= 12) {
@@ -237,6 +238,9 @@ export default async function HomePage() {
   )
   const homeGalleryItems = [...prioritizedGallery, ...fallbackGalleryItems].slice(0, 4)
   
+  const phoneHref = getPhoneHref(settings.phone)
+  const phoneDisplay = formatPhoneDisplay(settings.phone)
+
   const businessSchema = await generateLocalBusinessSchema()
   const reviewSchema = reviews.length > 0 ? generateReviewSchema(reviews) : null
 
@@ -531,13 +535,15 @@ export default async function HomePage() {
               </div>
             </div>
 
-            <div className="text-center md:text-right">
-              <div className="text-sm opacity-90 mb-2">Hemen Arayın</div>
-              <a href={getPhoneHref(settings.phone)} className="text-5xl font-bold hover:opacity-80 transition block">
-                {formatPhoneDisplay(settings.phone)}
-              </a>
-              <div className="text-sm opacity-90 mt-2">Ücretsiz Keşif & Fiyat Teklifi</div>
-            </div>
+            {phoneHref && phoneDisplay && (
+              <div className="text-center md:text-right">
+                <div className="text-sm opacity-90 mb-2">Hemen Arayın</div>
+                <a href={phoneHref} className="text-5xl font-bold hover:opacity-80 transition block">
+                  {phoneDisplay}
+                </a>
+                <div className="text-sm opacity-90 mt-2">Ücretsiz Keşif & Fiyat Teklifi</div>
+              </div>
+            )}
           </div>
         </div>
       </section>

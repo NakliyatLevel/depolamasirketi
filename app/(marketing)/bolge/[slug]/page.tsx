@@ -54,9 +54,12 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     }
   }
 
+  const metaTitle = area.metaTitle || area.city || `${area.slug} Eşya Depolama`
+  const metaDescription = area.metaDescription || area.description || `${area.city} ve çevresinde profesyonel hizmet sunuyoruz`
+
   return {
-    title: area.metaTitle || `${area.city} Evden Eve Nakliyat`,
-    description: area.metaDescription || area.description || `${area.city} ve çevresinde profesyonel evden eve nakliyat hizmeti`,
+    title: metaTitle,
+    description: metaDescription,
   }
 }
 
@@ -76,18 +79,17 @@ export default async function ServiceAreaDetailPage({
     notFound()
   }
 
+  const pageTitle = area.metaTitle || area.city
+  const pageDescription = area.metaDescription || area.description || `${area.city} ve çevresinde profesyonel hizmet sunuyoruz`
+
   return (
     <>
       <PageHeading
-        title={
-          area.city.includes('Evden Eve Nakliyat')
-            ? area.city
-            : `${area.city} Evden Eve Nakliyat`
-        }
-        description={area.description || `${area.city} ve çevresinde profesyonel evden eve nakliyat hizmeti sunuyoruz`}
+        title={pageTitle}
+        description={pageDescription}
         breadcrumbs={[
           { label: 'Hizmet Bölgeleri', href: '/hizmet-bolgeleri' },
-          { label: area.city },
+          { label: pageTitle },
         ]}
       />
 

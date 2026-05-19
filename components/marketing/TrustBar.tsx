@@ -47,9 +47,9 @@ export default function TrustBar() {
                 WhatsApp
               </a>
             ) : (
-              <a href="tel:4446502" className="text-3xl font-bold text-secondary hover:text-secondary/80 transition">
-                444 65 02
-              </a>
+              <span className="inline-flex items-center justify-center px-6 py-3 rounded-full bg-muted text-muted-foreground text-sm font-medium select-none">
+                WhatsApp numarası eklenmedi
+              </span>
             )}
           </div>
 
