@@ -188,12 +188,14 @@ export default async function HizmetlerimizPage() {
             >
               Ücretsiz Teklif Al
             </Link>
-            <a
-              href={`tel:${settings.phone}`}
-              className="px-8 py-4 bg-white text-primary rounded-lg font-semibold hover:bg-white/90 transition"
-            >
-              {settings.phone || '444 65 02'}
-            </a>
+            {settings.phone && (
+              <a
+                href={`tel:${settings.phone}`}
+                className="px-8 py-4 bg-white text-primary rounded-lg font-semibold hover:bg-white/90 transition"
+              >
+                {settings.phone}
+              </a>
+            )}
           </div>
         </div>
       </section>

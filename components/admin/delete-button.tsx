@@ -15,7 +15,10 @@ export default function DeleteButton({ id, endpoint }: { id: string; endpoint: s
 
     setLoading(true)
     try {
-      const response = await fetch(`/api/${endpoint}/${id}`, {
+      const normalizedEndpoint = endpoint.startsWith('/') ? endpoint : `/api/${endpoint}`
+      const url = `${normalizedEndpoint.replace(/\/$/, '')}/${id}`
+
+      const response = await fetch(url, {
         method: 'DELETE',
       })
 

@@ -15,18 +15,27 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           return null
         }
 
+        const email = credentials.email as string
         const user = await prisma.user.findUnique({
-          where: { email: credentials.email as string },
+          where: { email },
         })
+
+        if (!user) {
+          console.warn('[auth] Kullanıcı bulunamadı', email)
+        }
 
         if (!user) {
           return null
         }
 
-        const isPasswordValid = await bcrypt.compare(
-          credentials.password as string,
-          user.password || ''
-        )
+        const password = credentials.password as string
+        const isPasswordValid = await bcrypt.compare(password, user.password || '')
+
+        if (!isPasswordValid) {
+          console.warn('[auth] Şifre uyuşmadı', email)
+        } else {
+          console.info('[auth] Giriş başarılı', email)
+        }
 
         if (!isPasswordValid) {
           return null

@@ -158,12 +158,14 @@ export default async function HakkimizdaPage() {
             >
               Teklif Al
             </a>
-            <a
-              href={`tel:${settings.phone}`}
-              className="px-8 py-4 bg-primary text-white rounded-lg font-semibold hover:bg-primary/90 transition"
-            >
-              {settings.phone || '444 65 02'}
-            </a>
+            {settings.phone && (
+              <a
+                href={`tel:${settings.phone}`}
+                className="px-8 py-4 bg-primary text-white rounded-lg font-semibold hover:bg-primary/90 transition"
+              >
+                {settings.phone}
+              </a>
+            )}
           </div>
         </div>
       </section>
