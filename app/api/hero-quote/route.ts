@@ -7,9 +7,12 @@ export async function POST(request: Request) {
     const body = await request.json()
     const { fullName, phone, fromCity, toCity, roomType, priceMin, priceMax } = body
 
-    if (!fullName?.trim() || !phone?.trim() || !fromCity?.trim() || !toCity?.trim() || !roomType?.trim()) {
+    if (!fullName?.trim() || !phone?.trim() || !roomType?.trim()) {
       return NextResponse.json({ error: 'Lütfen tüm alanları doldurun.' }, { status: 400 })
     }
+
+    const normalizedFromCity = typeof fromCity === 'string' && fromCity.trim().length > 0 ? fromCity.trim() : 'Belirtilmedi'
+    const normalizedToCity = typeof toCity === 'string' && toCity.trim().length > 0 ? toCity.trim() : 'Belirtilmedi'
 
     const rooms = Number.parseInt(roomType, 10) || Number.parseInt(roomType.split('+')[0], 10) || 1
 
@@ -19,10 +22,10 @@ export async function POST(request: Request) {
         phone: phone.trim(),
         email: body.email?.trim() || 'hero-form@levelnakliyat.com',
         preferredDate: null,
-        fromAddress: fromCity.trim(),
+        fromAddress: normalizedFromCity,
         fromFloor: 0,
         fromElevator: false,
-        toAddress: toCity.trim(),
+        toAddress: normalizedToCity,
         toFloor: 0,
         toElevator: false,
         distance: null,
@@ -45,8 +48,8 @@ export async function POST(request: Request) {
       await sendHeroQuickQuoteEmail({
         fullName: fullName.trim(),
         phone: phone.trim(),
-        fromCity: fromCity.trim(),
-        toCity: toCity.trim(),
+        fromCity: normalizedFromCity,
+        toCity: normalizedToCity,
         roomType: roomType.trim(),
         priceMin,
         priceMax,

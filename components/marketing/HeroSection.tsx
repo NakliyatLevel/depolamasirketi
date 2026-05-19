@@ -21,8 +21,6 @@ interface HeroSectionProps {
 export default function HeroSection({ settings }: HeroSectionProps) {
   const [activeCity, setActiveCity] = useState(0)
   const [heroForm, setHeroForm] = useState({
-    fromCity: '',
-    toCity: '',
     roomType: '1+1',
     fullName: '',
     phone: '',
@@ -43,8 +41,6 @@ export default function HeroSection({ settings }: HeroSectionProps) {
   }, [cities.length])
 
   const isHeroPriceReady =
-    Boolean(heroForm.fromCity.trim()) &&
-    Boolean(heroForm.toCity.trim()) &&
     Boolean(heroForm.roomType.trim()) &&
     Boolean(heroForm.fullName.trim()) &&
     Boolean(heroForm.phone.trim())
@@ -59,14 +55,16 @@ export default function HeroSection({ settings }: HeroSectionProps) {
   const heroWhatsappHref = (() => {
     if (!settings.whatsapp) return ''
     const whatsappNumber = settings.whatsapp.toString().replace(/\s/g, '')
-    const text =
-      `Hızlı Teklif Talebi%0A` +
-      `Nereden: ${encodeURIComponent(heroForm.fromCity)}%0A` +
-      `Nereye: ${encodeURIComponent(heroForm.toCity)}%0A` +
-      `Ev Tipi: ${encodeURIComponent(heroForm.roomType)}%0A` +
-      `Ad Soyad: ${encodeURIComponent(heroForm.fullName)}%0A` +
-      `Telefon: ${encodeURIComponent(heroForm.phone)}`
-    return `https://wa.me/${whatsappNumber}?text=${text}`
+    const text = [
+      'Hızlı Teklif Talebi',
+      `Ev Tipi: ${heroForm.roomType}`,
+      `Ad Soyad: ${heroForm.fullName}`,
+      `Telefon: ${heroForm.phone}`,
+    ]
+      .map((line) => line.trim())
+      .join('\n')
+
+    return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`
   })()
 
   const handleHeroSubmit = async (e: React.FormEvent) => {
@@ -81,8 +79,6 @@ export default function HeroSection({ settings }: HeroSectionProps) {
         body: JSON.stringify({
           fullName: heroForm.fullName,
           phone: heroForm.phone,
-          fromCity: heroForm.fromCity,
-          toCity: heroForm.toCity,
           roomType: heroForm.roomType,
           priceMin: hasHeroPriceRange ? heroPriceMin : undefined,
           priceMax: hasHeroPriceRange ? heroPriceMax : undefined,
@@ -93,8 +89,6 @@ export default function HeroSection({ settings }: HeroSectionProps) {
 
       setHeroSubmitMessage('Talebiniz alındı. En kısa sürede sizinle iletişime geçeceğiz.')
       setHeroForm({
-        fromCity: '',
-        toCity: '',
         roomType: '1+1',
         fullName: '',
         phone: '',
@@ -276,30 +270,6 @@ export default function HeroSection({ settings }: HeroSectionProps) {
               </div>
 
               <form onSubmit={handleHeroSubmit} className="mt-6 space-y-4 flex-1">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">İl (Nereden)</label>
-                    <input
-                      type="text"
-                      value={heroForm.fromCity}
-                      onChange={(e) => setHeroForm((p) => ({ ...p, fromCity: e.target.value }))}
-                      placeholder="Örn: İstanbul"
-                      className="w-full px-4 py-3 rounded-lg border border-input focus:border-primary focus:ring-2 focus:ring-ring/20 outline-none transition-all"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">İl (Nereye)</label>
-                    <input
-                      type="text"
-                      value={heroForm.toCity}
-                      onChange={(e) => setHeroForm((p) => ({ ...p, toCity: e.target.value }))}
-                      placeholder="Örn: Ankara"
-                      className="w-full px-4 py-3 rounded-lg border border-input focus:border-primary focus:ring-2 focus:ring-ring/20 outline-none transition-all"
-                    />
-                  </div>
-                </div>
-
                 <div>
                   <label className="block text-sm font-medium text-foreground mb-2">Ev Tipi</label>
                   <div className="grid grid-cols-5 gap-2">
