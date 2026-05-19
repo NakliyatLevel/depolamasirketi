@@ -40,17 +40,35 @@ export default async function Footer() {
             </p>
             <div className="flex items-center gap-3">
               {settings.facebook && (
-                <a href={settings.facebook} target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-white/10 hover:bg-secondary flex items-center justify-center transition">
+                <a
+                  href={settings.facebook}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-9 h-9 rounded-full bg-white/10 hover:bg-secondary flex items-center justify-center transition"
+                  aria-label="Facebook sayfamız"
+                >
                   <Facebook className="w-4 h-4" />
                 </a>
               )}
               {settings.instagram && (
-                <a href={settings.instagram} target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-white/10 hover:bg-secondary flex items-center justify-center transition">
+                <a
+                  href={settings.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-9 h-9 rounded-full bg-white/10 hover:bg-secondary flex items-center justify-center transition"
+                  aria-label="Instagram hesabımız"
+                >
                   <Instagram className="w-4 h-4" />
                 </a>
               )}
               {settings.twitter && (
-                <a href={settings.twitter} target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-white/10 hover:bg-secondary flex items-center justify-center transition">
+                <a
+                  href={settings.twitter}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-9 h-9 rounded-full bg-white/10 hover:bg-secondary flex items-center justify-center transition"
+                  aria-label="Twitter hesabımız"
+                >
                   <Twitter className="w-4 h-4" />
                 </a>
               )}

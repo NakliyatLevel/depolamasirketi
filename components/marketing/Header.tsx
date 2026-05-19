@@ -235,6 +235,7 @@ export default function Header({ settings }: HeaderProps) {
             <button 
               className="md:hidden"
               onClick={() => setIsMobileMenuOpen(true)}
+              aria-label="Mobil menüyü aç"
             >
               <Menu className="w-6 h-6" />
             </button>

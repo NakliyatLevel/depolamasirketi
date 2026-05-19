@@ -15,7 +15,7 @@ const config: Config = {
           foreground: "#ffffff",
         },
         secondary: {
-          DEFAULT: "#FF3D00",
+          DEFAULT: "#C12700",
           foreground: "#ffffff",
         },
         background: "#ffffff",
@@ -25,7 +25,7 @@ const config: Config = {
         ring: "#1e455f",
         muted: {
           DEFAULT: "#f3f4f6",
-          foreground: "#6b7280",
+          foreground: "#374151",
         },
         accent: {
           DEFAULT: "#f3f4f6",

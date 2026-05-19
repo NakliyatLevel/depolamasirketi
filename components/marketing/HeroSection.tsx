@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import Image from 'next/image'
 import {
   ShieldCheck,
@@ -19,7 +19,6 @@ interface HeroSectionProps {
 }
 
 export default function HeroSection({ settings }: HeroSectionProps) {
-  const [activeCity, setActiveCity] = useState(0)
   const [heroForm, setHeroForm] = useState({
     roomType: '1+1',
     fullName: '',
@@ -28,22 +27,11 @@ export default function HeroSection({ settings }: HeroSectionProps) {
   const [heroSubmitLoading, setHeroSubmitLoading] = useState(false)
   const [heroSubmitMessage, setHeroSubmitMessage] = useState('')
 
-  const cities = ['İstanbul', 'Ankara', 'İzmir', 'Bursa', 'Antalya']
   const heroRoomOptions = [
     { value: '1+1', label: '1+1', volume: '15 m³' },
     { value: '2+1', label: '2+1', volume: '20 m³' },
     { value: '3+1', label: '3+1', volume: '25 m³' },
   ]
-
-  useEffect(() => {
-    const cityTimer = setInterval(() => {
-      setActiveCity(prev => (prev + 1) % cities.length)
-    }, 3000)
-
-    return () => {
-      clearInterval(cityTimer)
-    }
-  }, [cities.length])
 
   const isHeroPriceReady =
     Boolean(heroForm.roomType.trim()) &&

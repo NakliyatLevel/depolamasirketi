@@ -28,6 +28,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
           <button
             onClick={onClose}
             className="p-2 hover:bg-gray-100 rounded-full transition"
+            aria-label="Mobil menüyü kapat"
           >
             <X className="w-5 h-5" />
           </button>
