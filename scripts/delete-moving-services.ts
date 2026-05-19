@@ -2,24 +2,24 @@ const { PrismaClient } = require('@prisma/client')
 
 const prisma = new PrismaClient()
 
-const movingServiceSlugs = [
-  'ev-tasima',
-  'villa-tasimaciligi',
-  'parca-esya-tasimaciligi',
-  'sehir-ici-evden-eve-nakliyat',
-  'sehirler-arasi-evden-eve-nakliyat',
-  'ofis-tasimaciligi',
-  'banka-tasimaciligi',
-  'hastane-tasimaciligi',
-  'arsiv-tasimaciligi',
+const allowedStorageSlugs = [
+  'ev-esyasi-depolama',
+  'ofis-esyasi-depolama',
+  'parca-esya-depolama',
+  'arsiv-depolama',
+  'buro-depolama',
+  'evrak-depolama',
+  'koli-depolama',
+  'ogrenci-esya-depolama',
+  'beyaz-esya-depolama',
 ]
 
-async function deleteMovingServices() {
+async function deleteNonStorageServices() {
   try {
     const deleted = await prisma.service.deleteMany({
       where: {
         slug: {
-          in: movingServiceSlugs,
+          notIn: allowedStorageSlugs,
         },
       },
     })
@@ -32,4 +32,4 @@ async function deleteMovingServices() {
   }
 }
 
-deleteMovingServices()
+deleteNonStorageServices()

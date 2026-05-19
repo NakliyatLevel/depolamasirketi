@@ -50,20 +50,6 @@ export default function HeroQuickQuoteEmail({
 
             <Hr style={hr} />
 
-            {fromCity && (
-              <>
-                <Text style={label}>İletilen Not (Nereden):</Text>
-                <Text style={value}>{fromCity}</Text>
-              </>
-            )}
-
-            {toCity && (
-              <>
-                <Text style={label}>İletilen Not (Nereye):</Text>
-                <Text style={value}>{toCity}</Text>
-              </>
-            )}
-
             <Text style={label}>Talep Edilen Paket:</Text>
             <Text style={value}>{roomType}</Text>
 

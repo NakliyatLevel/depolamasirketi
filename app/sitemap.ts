@@ -3,8 +3,15 @@ import { prisma } from '@/lib/db'
 
 export const dynamic = 'force-dynamic'
 
+const normalizeBaseUrl = () => {
+  const fromEnv = process.env.NEXT_PUBLIC_SITE_URL?.trim()
+  const fallbacks = ['https://depolamasirketi.com.tr']
+  const candidate = fromEnv && fromEnv.length > 0 ? fromEnv : fallbacks[0]
+  return candidate.replace(/\/$/, '')
+}
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://sehirlerarasi-evden-eve-nakliyat.vercel.app'
+  const baseUrl = normalizeBaseUrl()
 
   // Static pages
   const staticPages = [

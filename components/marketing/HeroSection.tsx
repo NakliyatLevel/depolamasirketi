@@ -26,6 +26,7 @@ export default function HeroSection({ settings }: HeroSectionProps) {
   })
   const [heroSubmitLoading, setHeroSubmitLoading] = useState(false)
   const [heroSubmitMessage, setHeroSubmitMessage] = useState('')
+  const [heroSuccessData, setHeroSuccessData] = useState<{ roomType: string; fullName: string; phone: string } | null>(null)
 
   const heroRoomOptions = [
     { value: '1+1', label: '1+1', volume: '15 m³' },
@@ -45,20 +46,25 @@ export default function HeroSection({ settings }: HeroSectionProps) {
   const heroPriceMax = Number.parseInt((heroPriceMaxRaw || '').toString().replace(/\./g, '').replace(/\s/g, ''), 10)
   const hasHeroPriceRange = Number.isFinite(heroPriceMin) && Number.isFinite(heroPriceMax) && heroPriceMin > 0 && heroPriceMax > 0
 
-  const heroWhatsappHref = (() => {
+  const buildWhatsappHref = (data: { roomType: string; fullName: string; phone: string }) => {
     if (!settings.whatsapp) return ''
     const whatsappNumber = settings.whatsapp.toString().replace(/\s/g, '')
     const text = [
       'Hızlı Teklif Talebi',
-      `Ev Tipi: ${heroForm.roomType}`,
-      `Ad Soyad: ${heroForm.fullName}`,
-      `Telefon: ${heroForm.phone}`,
+      `Ev Tipi: ${data.roomType}`,
+      `Ad Soyad: ${data.fullName}`,
+      `Telefon: ${data.phone}`,
     ]
       .map((line) => line.trim())
       .join('\n')
 
     return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`
-  })()
+  }
+
+  const heroWhatsappHref = buildWhatsappHref(heroForm)
+  const heroSuccessWhatsappHref = heroSuccessData ? buildWhatsappHref(heroSuccessData) : ''
+
+  const phoneHref = settings.phone ? `tel:${settings.phone.toString().replace(/\s/g, '')}` : ''
 
   const handleHeroSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -66,6 +72,8 @@ export default function HeroSection({ settings }: HeroSectionProps) {
     setHeroSubmitLoading(true)
 
     try {
+      const submittedSnapshot = { ...heroForm }
+
       const response = await fetch('/api/hero-quote', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -81,6 +89,7 @@ export default function HeroSection({ settings }: HeroSectionProps) {
       if (!response.ok) throw new Error('Gönderim başarısız')
 
       setHeroSubmitMessage('Talebiniz alındı. En kısa sürede sizinle iletişime geçeceğiz.')
+      setHeroSuccessData(submittedSnapshot)
       setHeroForm({
         roomType: '1+1',
         fullName: '',
@@ -369,6 +378,38 @@ export default function HeroSection({ settings }: HeroSectionProps) {
                 {heroSubmitMessage && (
                   <div className="text-xs text-center text-muted-foreground">
                     {heroSubmitMessage}
+                  </div>
+                )}
+
+                {heroSuccessData && (
+                  <div className="rounded-xl border border-emerald-100 bg-emerald-50/80 p-4 space-y-3 text-center">
+                    <div className="text-sm font-semibold text-emerald-900">Talebiniz alındı.</div>
+                    <div className="text-xs text-emerald-800">
+                      Ev Tipi: <strong>{heroSuccessData.roomType}</strong> · Ad Soyad: <strong>{heroSuccessData.fullName || 'Belirtilmedi'}</strong>
+                    </div>
+                    <p className="text-xs text-emerald-800">
+                      Operasyon ekibimiz dakikalar içinde sizi arayacak. Dilerseniz aşağıdaki tuşlarla hemen iletişime geçebilirsiniz.
+                    </p>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                      {phoneHref && (
+                        <a
+                          href={phoneHref}
+                          className="inline-flex items-center justify-center rounded-lg bg-white text-emerald-700 border border-emerald-200 px-3 py-2 text-sm font-semibold hover:bg-emerald-100 transition"
+                        >
+                          Hemen Ara
+                        </a>
+                      )}
+                      {heroSuccessWhatsappHref && (
+                        <a
+                          href={heroSuccessWhatsappHref}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center justify-center rounded-lg bg-emerald-600 text-white px-3 py-2 text-sm font-semibold hover:bg-emerald-700 transition"
+                        >
+                          WhatsApp’tan Yaz
+                        </a>
+                      )}
+                    </div>
                   </div>
                 )}
               </form>

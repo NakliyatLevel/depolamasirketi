@@ -1,0 +1,106 @@
+Site Genel Stratejisi
+---------------------
+- Marka Konumu: Depolama Şirketi, Level Nakliyat’ın self/managed storage uzmanlığıdır. İstanbul Şişli Loft Residence operasyon merkezinden yönetilir; bütün iletişim `settings` tablosundan çekilen WhatsApp (0 532 332 45 71) ve sabit hatlarla yürür.
+- Deneyim Vaadi: “Hacme göre öde + sigortalı depolama” ikilisi. Klima kontrollü depolar, barkodlu sandık takibi ve 7/24 kamera/IoT sensörleri ile eşyaların tüm yaşam döngüsü tek panelden izlenir.
+- Bilgi Mimarisi: Ana sayfa -> Hizmetler -> Çözümler -> Hizmet Bölgeleri -> Teklif Al/İletişim. Her bölüm Prisma modellerinden (Service, Solution, ServiceArea, SiteSetting) dinamik olarak doldurulur.
+- SEO Temeli: `seo_title`, `seo_description`, `services_description`, `areas_description` gibi girdiler DB’den gelir. Tüm slug’lar Türkçe ve tireli formatta tutulur; servis sayfaları + bölge sayfaları iç linklerle güçlendirilir.
+- Dönüşüm Omurgası: Hero CTA (teklif formu) > Hizmet kartları > Solutions içerikleri > Hizmet bölgeleri > Form/WhatsApp CTA. `/teklif-al` formu 5 adımlı wizard’dır ve submit sonrası özet + Telefon/WhatsApp butonları gösterir (form sıfırlanmaz).
+
+Çözümlerimiz (Operasyon Katmanları)
+------------------------------------
+Bu içerikler `Solution` modeliyle yönetilir; her biri makale uzunluğunda açıklamalara, tablo/listelere sahiptir ve taşıma + depolama süreçlerini destekleyen üst seviye servislerdir.
+
+1. Ücretsiz Ekspertiz — slug `ucretsiz-ekspertiz`
+   * Rol: Fiziksel keşif yaparak hacim, asansör ölçüsü, kırılgan envanteri kayıt altına almak ve 24 saat içinde yazılı teklif üretmek.
+   * İçerik: Telefon vs fotoğraf vs yerinde keşif karşılaştırma tablosu, hazırlık checklist’i, ölçülen metrikler listesi.
+   * Bot Kullanımı: Teklif konuşmalarında “uzman yerinde ölçüm yapar, teklif sabitlenir” vurgusu yapılmalıdır; fiyat pazarlığına girilmez, keşif randevusu önerilir.
+
+2. Sözleşmeli Nakliyat — slug `sozlesmeli-nakliyat`
+   * Rol: Taşıma günü fiyat baskısı ve sorumluluk tartışmasını bitiren çift imzalı sözleşme.
+   * İçerik: Standart vs Güçlendirilmiş sözleşme tablosu, olmazsa olmaz maddeler listesi, imza öncesi kontrol listesi, anlaşmazlık çözüm rehberi.
+   * Bot Kullanımı: Hukuki güvence isteyen kullanıcıları sözleşme sayfasına yönlendir; sözleşme olmadan taşıma yapılmadığını açıkça belirt.
+
+3. Sigortalı Nakliyat — slug `sigortali-nakliyat`
+   * Rol: Hasar, kayıp, doğal afet gibi riskleri poliçe kapsamına alma.
+   * İçerik: Sigorta türleri tablosu (zorunlu, tam, beyan), hasar bildirim adımları, eksper süreci ve kritik süreler.
+   * Bot Kullanımı: Yüksek değerli eşya soranlara poliçe türlerini açıklayıp 48 saatlik hasar bildirimi kuralını hatırlat.
+
+4. Asansörlü Nakliyat — slug `asansorlu-nakliyat`
+   * Rol: Bina içi asansöre sığmayan hacimli mobilyaları vinç asansörle taşıma.
+   * İçerik: Vinç gerektiren eşyalar listesi, taşıma yöntemleri karşılaştırması, site yönetimi koordinasyon maddeleri, operasyon günü akışı.
+   * Bot Kullanımı: Köşe koltuk/piyano sorularında “vinç planı + site onayı” gerekliliğini vurgula.
+
+5. Ambalaj & Paketleme — slug `ambalaj-paketleme`
+   * Rol: Hasarı daha başlamadan engelleyen profesyonel paketleme ve malzeme yönetimi.
+   * İçerik: Eşyaya göre ambalaj tablosu, amatör vs uzman paketleme kıyası, paketleme sırası, kullanılan malzeme listesi.
+   * Bot Kullanımı: “Kendim paketlesem olur mu?” sorularında profesyonel paketlemenin sigorta koşulu olduğunu belirt.
+
+Hizmetler (Depolama Çekirdek Ürünleri)
+--------------------------------------
+`Service` modeli yalnızca depolama hizmetlerini içerir ve şu anda 9 aktif slug bulunur. Her serviste uzun anlatım, paket tablosu ve fayda bullet’ları vardır. Botlar aşağıdaki temaları hatırlatmalıdır:
+
+1. Ev Eşyası Depolama (`ev-esyasi-depolama`)
+   - Senaryo: Tadilat, tayin, mevsimlik ayrılıklar.
+   - Fark: Barkodlu sandık, termal kamera raporları, dijital panel, mobilya söküm/kurulum.
+
+2. Ofis Eşyası Depolama (`ofis-esyasi-depolama`)
+   - Senaryo: Kurumsal taşınma, geçici ofis kapatma.
+   - Fark: ERP uyumlu raporlar, kafesli raflar, SLA takibi, antistatik zemin.
+
+3. Parça Eşya Depolama (`parca-esya-depolama`)
+   - Senaryo: Az hacimli koli/mobilya.
+   - Fark: QR etiket, mobil uygulama fotoğrafları, kilitli kafes, 48 saat teslim.
+
+4. Arşiv Depolama (`arsiv-depolama`)
+   - Senaryo: Kurumsal belge saklama.
+   - Fark: TS 13298 + KVKK uyumu, %50 nem sınırı, biyometrik giriş, 4 saatte evrak ulaştırma.
+
+5. Büro Depolama (`buro-depolama`)
+   - Senaryo: Showroom, ajans, danışmanlık ekipmanları.
+   - Fark: HEPA filtreli hava, asılı raf, demo cihazları için şarjlı dolaplar, online rezervasyon.
+
+6. Evrak Depolama (`evrak-depolama`)
+   - Senaryo: Sözleşme/fatura arşivleri.
+   - Fark: Yetkilendirilmiş erişim, dijital katalog, API entegrasyonu, video kayıtlı imha.
+
+7. Koli Depolama (`koli-depolama`)
+   - Senaryo: Sezonluk stok veya taşınma kolileri.
+   - Fark: Hacim bazlı fiyat, nem bariyerli palet, opak mühür, hafta sonu teslim.
+
+8. Öğrenci Eşya Depolama (`ogrenci-esya-depolama`)
+   - Senaryo: Dönem arası öğrenciler.
+   - Fark: Kapıdan al-kapıya teslim, velilere SMS, dönemlik taksit, enstrüman/bisiklet koruması.
+
+9. Beyaz Eşya Depolama (`beyaz-esya-depolama`)
+   - Senaryo: Beyaz eşya ve ankastre bekletme.
+   - Fark: Dikey sabitleme aparatları, nem/titreşim sensörü, teslim öncesi bakım + test raporu.
+
+Hizmet Bölgeleri (Lokal SEO Motoru)
+-----------------------------------
+- Veri Modeli: `serviceArea` (city, slug, description, content, metaTitle, metaDescription, order, active).
+- Kapsam: İstanbul’un tüm ilçeleri + çevre iller kademeli olarak ekleniyor. Slug formatı `{ilce}-esya-depolama`.
+- İçerik Şablonu: Giriş paragrafı, bölgesel avantajları içeren tablo/listeler, güvenlik/iklim/taşıma entegrasyonu alt başlıkları. Bazı sayfalarda 1000+ kelimelik anlatımlar ve tablo içerikleri mevcut.
+- CTA Bağlantısı: Her bölge sayfası `/teklif-al` ve WhatsApp’a linklenir; `areas_description` ana sayfa hizasında kullanılacak genel mesajdır.
+- Bot Kullanımı: Kullanıcı bir ilçe sorarsa aynı slug ile URL önerilir ve lokal avantajlar (yakın depo, hızlı teslim, sözleşmeli hizmet) vurgulanır.
+
+Veri & UX Akışı
+----------------
+- Formlar: `/teklif-al` 5 adım (1) Kişisel bilgiler, (2) Depolama detayları, (3) Eşya listesi, (4) Ek hizmetler, (5) Özet & Gönder. Submit sonrası form sıfırlanmaz; başarı ekranında Telefon & WhatsApp butonları çıkar. Botlar kullanıcılara bu süreçten bahsedip “formu doldur, ardından temsilci seni arar” mesajını vermeli.
+- Email Bildirimleri: Tüm formlar `sendEmail` üzerinden `Form - depolamasirketi.com.tr` başlığıyla Zoho SMTP (bilgi@levelnakliyat.com.tr) üzerinden iletilir.
+- İçerik Kaynağı: CMS yok; içerikler Prisma veritabanında tutulur. Güncelleme yapılacaksa staging önerilir. `scripts/export-content.js` ile snapshot alınabilir.
+- Navigasyon Bileşenleri: HeroSection (fiyat bandı, canlı CTA), Services grid (dinamik), Solutions içerikleri (statik makale), ServiceAreas listesi, TrustBar + LogoMarquee referansları, FAQ (aktif 6 kayıt) ve Blog (yayınlanmış son 3 yazı) bileşenleri.
+
+Dil, Ton ve Bot Rehberi
+------------------------
+- Dil: Türkçe, kurumsal ama ulaşılabilir. Teknik terimler (KVKK, SLA, ERP, FM onaylı, TS 13298) açık yazılır. Kısa cümleler yerine açıklayıcı paragraflar tercih edilir.
+- Ton: Yetkin, veri odaklı, güven verici. İddialar mutlaka süreç veya teknolojiyle desteklenmelidir (ör: “klima kontrollü depolar + barkodlu sandık” gibi).
+- CTA Rehberi: Tüm konuşmalar WhatsApp (0 532 332 45 71), sabit hatlar ve `/teklif-al` formuna yönlendirme ile kapanmalı. “Formu doldurduğunuzda özet ekranından bizi direkt arayabilirsiniz” bilgisi tekrar edilebilir.
+- Yapılmaması Gerekenler: Taşıma hizmetleri artık listede yok; botlar taşıma slug’larını önermemeli. Fiyat verilmez, yerine “hacme göre keşif sonrası netleştiriyoruz” denir.
+
+Operasyonel Notlar
+-------------------
+1. Veritabanı Hijyeni: Neon’daki `service` tablosu yalnızca depolama slug’larını içerir; taşıma başlıkları kalıcı olarak silinmiştir. Yeni hizmet eklerken depolama odaklı kalın.
+2. İçerik Senkronu: `llms.txt` ile veritabanı uyumu periyodik olarak kontrol edilmeli; slug veya meta değiştiğinde doküman güncellenmeli.
+3. Analytics: Hizmet ve bölge sayfaları yüksek kelime yoğunluğuna sahip; canonical ve schema yapıları `lib/seo/schema.ts` üzerinden “SelfStorage” tipine göre üretilir.
+4. Destek Kanalları: Header ve footer’da telefon, e-posta, sosyal medya (Instagram) ve canlı chat placeholder’ı bulunur. Botlar bu kanalları çerçeve dışında yeni kanal türetmeden kullanmalı.
+5. Güvenlik & Gizlilik: Tüm formlar KVKK uyumlu açıklamalar içerir; kullanıcı verisi yalnızca teklif hazırlamak için işlenir. Botlar veri talep ederken bu çerçeveyi hatırlatabilir.

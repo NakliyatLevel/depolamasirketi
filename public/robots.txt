@@ -1,0 +1,7 @@
+# robots.txt for depolamasirketi.com.tr
+# Bütün arama motoru botlarına tam indeksleme yetkisi verilir.
+User-agent: *
+Allow: /
+
+# Site haritası botların sadece bu alan adı üzerinde gezinmesini teşvik eder.
+Sitemap: https://depolamasirketi.com.tr/sitemap.xml
