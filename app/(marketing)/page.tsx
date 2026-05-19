@@ -28,6 +28,9 @@ import {
   Landmark,
   CreditCard,
   Vault,
+  Boxes,
+  FileText,
+  Snowflake,
 } from 'lucide-react'
 import HeroSection from '@/components/marketing/HeroSection'
 import TrustBar from '@/components/marketing/TrustBar'
@@ -112,6 +115,15 @@ const serviceIconMap: Record<string, LucideIcon> = {
   'muze-tasimaciligi': Landmark,
   'bankamatik-tasimaciligi': CreditCard,
   'para-kasasi-tasimaciligi': Vault,
+  'ev-esyasi-depolama': Home,
+  'ofis-esyasi-depolama': Briefcase,
+  'parca-esya-depolama': Package,
+  'arsiv-depolama': Archive,
+  'buro-depolama': Building,
+  'evrak-depolama': FileText,
+  'koli-depolama': Boxes,
+  'ogrenci-esya-depolama': GraduationCap,
+  'beyaz-esya-depolama': Snowflake,
 }
 
 const getServiceIcon = (slug?: string): LucideIcon => {

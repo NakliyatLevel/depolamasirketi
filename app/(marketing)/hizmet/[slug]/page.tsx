@@ -2,7 +2,25 @@ import { prisma } from '@/lib/db'
 import { getSiteSettings } from '@/lib/settings'
 import { notFound } from 'next/navigation'
 import { PageHeading } from '@/components/ui/page-heading'
-import { CheckCircle, Phone, Mail, Clock, ArrowRight, Home, Building2, Package, ClipboardList, Plane, Truck } from 'lucide-react'
+import {
+  CheckCircle,
+  Phone,
+  Mail,
+  Clock,
+  ArrowRight,
+  Home,
+  Building2,
+  Package,
+  ClipboardList,
+  Plane,
+  Truck,
+  Briefcase,
+  Archive,
+  Boxes,
+  GraduationCap,
+  FileText,
+  Snowflake,
+} from 'lucide-react'
 import Link from 'next/link'
 
 const iconMap: Record<string, any> = {
@@ -12,6 +30,15 @@ const iconMap: Record<string, any> = {
   'paketleme-hizmeti': ClipboardList,
   'uluslararasi-nakliyat': Plane,
   'parca-esya-tasima': Truck,
+  'ev-esyasi-depolama': Home,
+  'ofis-esyasi-depolama': Briefcase,
+  'parca-esya-depolama': Package,
+  'arsiv-depolama': Archive,
+  'buro-depolama': Building2,
+  'evrak-depolama': FileText,
+  'koli-depolama': Boxes,
+  'ogrenci-esya-depolama': GraduationCap,
+  'beyaz-esya-depolama': Snowflake,
 }
 
 async function getService(slug: string) {
