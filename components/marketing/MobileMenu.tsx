@@ -73,12 +73,12 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                   </li>
                   <li>
                     <Link href="/cozum/sozlesmeli-nakliyat" onClick={onClose} className="block py-2 px-3 hover:bg-gray-100 rounded-md transition text-sm text-gray-700">
-                      Sözleşmeli Nakliyat
+                      Sözleşmeli Ev Taşıma
                     </Link>
                   </li>
                   <li>
                     <Link href="/cozum/sigortali-nakliyat" onClick={onClose} className="block py-2 px-3 hover:bg-gray-100 rounded-md transition text-sm text-gray-700">
-                      Sigortalı Nakliyat
+                      Sigortalı Evden Eve Nakliyat
                     </Link>
                   </li>
                   <li>
@@ -106,46 +106,52 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
               </button>
               {isHizmetlerOpen && (
                 <ul className="ml-4 mt-1 space-y-1 border-l-2 border-primary/20 pl-2">
-                  <li className="py-1 px-3 text-xs font-semibold text-primary uppercase tracking-wide">Bireysel</li>
+                  <li className="py-1 px-3 text-xs font-semibold text-primary uppercase tracking-wide">Bireysel Depolama</li>
                   <li>
-                    <Link href="/hizmet/ev-tasima" onClick={onClose} className="block py-2 px-3 hover:bg-gray-100 rounded-md transition text-sm text-gray-700">
-                      Ev Taşıma
+                    <Link href="/hizmet/ev-esyasi-depolama" onClick={onClose} className="block py-2 px-3 hover:bg-gray-100 rounded-md transition text-sm text-gray-700">
+                      Ev Eşyası Depolama
                     </Link>
                   </li>
                   <li>
-                    <Link href="/hizmet/villa-tasimaciligi" onClick={onClose} className="block py-2 px-3 hover:bg-gray-100 rounded-md transition text-sm text-gray-700">
-                      Villa Taşımacılığı
+                    <Link href="/hizmet/ogrenci-esya-depolama" onClick={onClose} className="block py-2 px-3 hover:bg-gray-100 rounded-md transition text-sm text-gray-700">
+                      Öğrenci Eşya Depolama
                     </Link>
                   </li>
                   <li>
-                    <Link href="/hizmet/parca-esya-tasimaciligi" onClick={onClose} className="block py-2 px-3 hover:bg-gray-100 rounded-md transition text-sm text-gray-700">
-                      Parça Eşya Taşımacılığı
+                    <Link href="/hizmet/beyaz-esya-depolama" onClick={onClose} className="block py-2 px-3 hover:bg-gray-100 rounded-md transition text-sm text-gray-700">
+                      Beyaz Eşya Depolama
                     </Link>
                   </li>
                   <li>
-                    <Link href="/hizmet/sehir-ici-nakliyat" onClick={onClose} className="block py-2 px-3 hover:bg-gray-100 rounded-md transition text-sm text-gray-700">
-                      Şehir İçi Nakliyat
+                    <Link href="/hizmet/parca-esya-depolama" onClick={onClose} className="block py-2 px-3 hover:bg-gray-100 rounded-md transition text-sm text-gray-700">
+                      Parça Eşya Depolama
+                    </Link>
+                  </li>
+                  <li className="py-1 px-3 text-xs font-semibold text-primary uppercase tracking-wide mt-1">Kurumsal Depolama</li>
+                  <li>
+                    <Link href="/hizmet/ofis-esyasi-depolama" onClick={onClose} className="block py-2 px-3 hover:bg-gray-100 rounded-md transition text-sm text-gray-700">
+                      Ofis Eşyası Depolama
                     </Link>
                   </li>
                   <li>
-                    <Link href="/hizmet/sehirler-arasi-nakliyat" onClick={onClose} className="block py-2 px-3 hover:bg-gray-100 rounded-md transition text-sm text-gray-700">
-                      Şehirler Arası Nakliyat
-                    </Link>
-                  </li>
-                  <li className="py-1 px-3 text-xs font-semibold text-primary uppercase tracking-wide mt-1">Kurumsal</li>
-                  <li>
-                    <Link href="/hizmet/ofis-tasimaciligi" onClick={onClose} className="block py-2 px-3 hover:bg-gray-100 rounded-md transition text-sm text-gray-700">
-                      Ofis Taşımacılığı
+                    <Link href="/hizmet/buro-depolama" onClick={onClose} className="block py-2 px-3 hover:bg-gray-100 rounded-md transition text-sm text-gray-700">
+                      Büro Depolama
                     </Link>
                   </li>
                   <li>
-                    <Link href="/hizmet/fabrika-tasimaciligi" onClick={onClose} className="block py-2 px-3 hover:bg-gray-100 rounded-md transition text-sm text-gray-700">
-                      Fabrika Taşımacılığı
+                    <Link href="/hizmet/arsiv-depolama" onClick={onClose} className="block py-2 px-3 hover:bg-gray-100 rounded-md transition text-sm text-gray-700">
+                      Arşiv Depolama
                     </Link>
                   </li>
                   <li>
-                    <Link href="/hizmet/hastane-tasimaciligi" onClick={onClose} className="block py-2 px-3 hover:bg-gray-100 rounded-md transition text-sm text-gray-700">
-                      Hastane Taşımacılığı
+                    <Link href="/hizmet/evrak-depolama" onClick={onClose} className="block py-2 px-3 hover:bg-gray-100 rounded-md transition text-sm text-gray-700">
+                      Evrak Depolama
+                    </Link>
+                  </li>
+                  <li className="py-1 px-3 text-xs font-semibold text-primary uppercase tracking-wide mt-1">Özel Paketler</li>
+                  <li>
+                    <Link href="/hizmet/koli-depolama" onClick={onClose} className="block py-2 px-3 hover:bg-gray-100 rounded-md transition text-sm text-gray-700">
+                      Koli Depolama
                     </Link>
                   </li>
                   <li>
