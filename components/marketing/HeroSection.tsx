@@ -268,7 +268,7 @@ export default function HeroSection({ settings }: HeroSectionProps) {
           </div>
 
           <div className="md:pt-2 h-full flex md:items-center">
-            <div className="rounded-2xl bg-white border border-border shadow-sm p-6 h-full flex flex-col w-full">
+            <div className="rounded-2xl bg-white border border-border shadow-sm p-6 flex flex-col w-full md:max-w-lg md:mx-auto">
               <div className="text-center space-y-1 rounded-xl bg-gradient-to-r from-primary/10 via-secondary/10 to-primary/10 p-4 border border-primary/20">
                 <div className="text-xl font-bold text-foreground">Hızlı Teklif Alın</div>
                 <div className="text-sm font-semibold text-secondary tracking-wide uppercase">2 Dakikada Ücretsiz Fiyat Teklifi</div>
@@ -277,7 +277,7 @@ export default function HeroSection({ settings }: HeroSectionProps) {
                 </p>
               </div>
 
-              <form onSubmit={handleHeroSubmit} className="mt-6 space-y-4 flex-1">
+              <form onSubmit={handleHeroSubmit} className="mt-6 space-y-4">
                 <div>
                   <label className="block text-sm font-medium text-foreground mb-2">Ev Tipi</label>
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
