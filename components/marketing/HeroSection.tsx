@@ -30,9 +30,9 @@ export default function HeroSection({ settings }: HeroSectionProps) {
 
   const cities = ['İstanbul', 'Ankara', 'İzmir', 'Bursa', 'Antalya']
   const heroRoomOptions = [
-    { value: '1+1', label: '1+1 - 15 M3' },
-    { value: '2+1', label: '2+1 - 20 M3' },
-    { value: '3+1', label: '3+1 - 25 M3' },
+    { value: '1+1', label: '1+1 - 15 m³' },
+    { value: '2+1', label: '2+1 - 20 m³' },
+    { value: '3+1', label: '3+1 - 25 m³' },
   ]
 
   useEffect(() => {
