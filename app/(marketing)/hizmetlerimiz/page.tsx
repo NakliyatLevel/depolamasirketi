@@ -4,22 +4,14 @@ import { PageHeading } from '@/components/ui/page-heading'
 import Link from 'next/link'
 import {
   Home,
-  Hotel,
-  Waves,
-  Route,
-  Globe,
+  GraduationCap,
   Package,
   Briefcase,
-  Building,
-  Factory,
-  Store,
-  Hospital,
-  ShieldCheck,
-  GraduationCap,
+  Building2,
   Archive,
-  Landmark,
-  CreditCard,
-  Vault,
+  FileText,
+  Snowflake,
+  Boxes,
   ArrowRight,
 } from 'lucide-react'
 
@@ -28,34 +20,25 @@ export async function generateMetadata(): Promise<Metadata> {
   
   return {
     title: `Hizmetlerimiz | ${settings.site_title}`,
-    description: 'Bireysel ve kurumsal taşımacılık hizmetlerimiz hakkında detaylı bilgi edinin.',
+    description: 'Ev, ofis, arşiv ve özel paket depolama çözümlerimizi tek sayfada keşfedin.',
   }
 }
 
 const services = {
   bireysel: [
-    { name: 'Ev Taşıma', slug: 'ev-tasima', icon: Home },
-    { name: 'Villa Taşımacılığı', slug: 'villa-tasimaciligi', icon: Hotel },
-    { name: 'Yalı Taşımacılığı', slug: 'yali-tasimaciligi', icon: Waves },
-    { name: 'Parça Eşya Taşımacılığı', slug: 'parca-esya-tasimaciligi', icon: Package },
-    { name: 'Şehir içi Evden Eve Nakliyat', slug: 'sehir-ici-nakliyat', icon: Route },
-    { name: 'Şehirler Arası Evden Eve Nakliyat', slug: 'sehirler-arasi-nakliyat', icon: Globe },
+    { name: 'Ev Eşyası Depolama', slug: 'ev-esyasi-depolama', icon: Home },
+    { name: 'Öğrenci Eşya Depolama', slug: 'ogrenci-esya-depolama', icon: GraduationCap },
+    { name: 'Parça Eşya Depolama', slug: 'parca-esya-depolama', icon: Package },
   ],
   kurumsal: [
-    { name: 'Ofis Taşımacılığı', slug: 'ofis-tasimaciligi', icon: Briefcase },
-    { name: 'Kurumsal Taşımacılık', slug: 'kurumsal-tasimaciligi', icon: Building },
-    { name: 'Fabrika Taşımacılığı', slug: 'fabrika-tasimaciligi', icon: Factory },
-    { name: 'Banka Taşımacılığı', slug: 'banka-tasimaciligi', icon: Landmark },
-    { name: 'Fuar Taşımacılığı', slug: 'fuar-tasimaciligi', icon: Store },
-    { name: 'Hastane Taşımacılığı', slug: 'hastane-tasimaciligi', icon: Hospital },
-    { name: 'Konsolosluk Taşımacılığı', slug: 'konsolosluk-tasimaciligi', icon: ShieldCheck },
-    { name: 'Üniversite Taşımacılığı', slug: 'universite-tasimaciligi', icon: GraduationCap },
+    { name: 'Ofis Eşyası Depolama', slug: 'ofis-esyasi-depolama', icon: Briefcase },
+    { name: 'Büro Depolama', slug: 'buro-depolama', icon: Building2 },
+    { name: 'Arşiv Depolama', slug: 'arsiv-depolama', icon: Archive },
+    { name: 'Evrak Depolama', slug: 'evrak-depolama', icon: FileText },
   ],
-  diger: [
-    { name: 'Arşiv Taşımacılığı', slug: 'arsiv-tasimaciligi', icon: Archive },
-    { name: 'Müze Taşımacılığı', slug: 'muze-tasimaciligi', icon: Landmark },
-    { name: 'Bankamatik Taşımacılığı', slug: 'bankamatik-tasimaciligi', icon: CreditCard },
-    { name: 'Para Kasası Taşımacılığı', slug: 'para-kasasi-tasimaciligi', icon: Vault },
+  ozel: [
+    { name: 'Beyaz Eşya Depolama', slug: 'beyaz-esya-depolama', icon: Snowflake },
+    { name: 'Koli Depolama', slug: 'koli-depolama', icon: Boxes },
   ],
 }
 
@@ -66,20 +49,20 @@ export default async function HizmetlerimizPage() {
     <div className="min-h-screen">
       <PageHeading
         title="Hizmetlerimiz"
-        description={settings.page_desc_hizmetlerimiz || 'Bireysel ve kurumsal taşımacılık ihtiyaçlarınız için profesyonel çözümler sunuyoruz.'}
+        description={settings.page_desc_hizmetlerimiz || 'Ev, ofis ve özel paket depolama ihtiyaçlarınız için klima kontrollü ve sigortalı çözümler sunuyoruz.'}
         breadcrumbs={[{ label: 'Hizmetlerimiz' }]}
       />
 
-      {/* Bireysel Taşımacılık */}
+      {/* Bireysel Depolama */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4 max-w-7xl">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-4 text-foreground">Bireysel Taşımacılık</h2>
+            <h2 className="text-4xl font-bold mb-4 text-foreground">Bireysel Depolama</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Ev, villa ve yalı taşımacılığından parça eşya taşımaya kadar tüm bireysel ihtiyaçlarınız için hizmetinizdeyiz.
+              şehir değişimi, dönem arası veya kısa süreli ihtiyaçlar için ev, öğrenci ve parça eşyalarınızı klima kontrollü alanlarda saklıyoruz.
             </p>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
             {services.bireysel.map((service) => (
               <Link
                 key={service.slug}
@@ -106,13 +89,13 @@ export default async function HizmetlerimizPage() {
         </div>
       </section>
 
-      {/* Kurumsal Taşımacılık */}
+      {/* Kurumsal Depolama */}
       <section className="py-16 bg-muted/30">
         <div className="container mx-auto px-4 max-w-7xl">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-4 text-foreground">Kurumsal Taşımacılık</h2>
+            <h2 className="text-4xl font-bold mb-4 text-foreground">Kurumsal Depolama</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Ofis, fabrika, banka ve diğer kurumsal taşımacılık ihtiyaçlarınız için özel çözümler sunuyoruz.
+              Ofis mobilyalarından arşiv kutularına kadar tüm kurumsal varlıklarınızı raf kodlu, sigortalı depolama altyapımızda koruruz.
             </p>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -140,17 +123,17 @@ export default async function HizmetlerimizPage() {
         </div>
       </section>
 
-      {/* Diğer Hizmetler */}
+      {/* Özel Paketler */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4 max-w-7xl">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-4 text-foreground">Diğer Hizmetler</h2>
+            <h2 className="text-4xl font-bold mb-4 text-foreground">Özel Paketler</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Özel taşımacılık ihtiyaçlarınız için uzman ekibimiz ve özel ekipmanlarımız ile hizmetinizdeyiz.
+              Beyaz eşya ve koli bazlı çözümlerimizle hacme göre fiyatlandırma ve esnek teslim planları sunuyoruz.
             </p>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {services.diger.map((service) => (
+            {services.ozel.map((service) => (
               <Link
                 key={service.slug}
                 href={`/hizmet/${service.slug}`}
