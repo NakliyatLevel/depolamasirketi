@@ -131,7 +131,7 @@ export default function HeroSection({ settings }: HeroSectionProps) {
 
               <p className="text-base md:text-lg text-muted-foreground leading-relaxed max-w-2xl">
                 Kurumsal ekiplerimizle eşyalarınızı adresinizden teslim alıyor, sigortalı depolarımızda modüler sistemlerle takip ediyor ve
-                istediğiniz anda aynı titizlikle geri teslim ediyoruz.
+                istediğiniz anda aynı titizlikle tekrar sizlere teslim ediyoruz. İstanbul&apos;un tek kurumsal eşya depolama tesisi!
               </p>
             </div>
 
