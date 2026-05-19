@@ -145,74 +145,50 @@ export default function Header({ settings }: HeaderProps) {
                 Hizmetlerimiz
                 <ChevronDown className="w-4 h-4" />
               </Link>
-              <div className="absolute top-full left-0 mt-2 w-64 bg-white border border-gray-200 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+              <div className="absolute top-full left-0 mt-2 w-72 bg-white border border-gray-200 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
                 <div className="px-4 py-3 border-b border-border">
-                  <p className="text-xs uppercase tracking-wide text-muted-foreground">Bireysel Taşımacılık</p>
+                  <p className="text-xs uppercase tracking-wide text-muted-foreground">Bireysel Depolama</p>
+                  <p className="text-sm text-muted-foreground">Ev ve kişisel eşyalar için</p>
                 </div>
                 <div className="py-1">
-                  <Link href="/hizmet/ev-tasima" className="block px-4 py-2 hover:bg-muted transition text-sm">
-                    Ev Taşıma
+                  <Link href="/hizmet/ev-esyasi-depolama" className="block px-4 py-2 hover:bg-muted transition text-sm">
+                    Ev Eşyası Depolama
                   </Link>
-                  <Link href="/hizmet/villa-tasimaciligi" className="block px-4 py-2 hover:bg-muted transition text-sm">
-                    Villa Taşımacılığı
+                  <Link href="/hizmet/ogrenci-esya-depolama" className="block px-4 py-2 hover:bg-muted transition text-sm">
+                    Öğrenci Eşya Depolama
                   </Link>
-                  <Link href="/hizmet/yali-tasimaciligi" className="block px-4 py-2 hover:bg-muted transition text-sm">
-                    Yalı Taşımacılığı
+                  <Link href="/hizmet/beyaz-esya-depolama" className="block px-4 py-2 hover:bg-muted transition text-sm">
+                    Beyaz Eşya Depolama
                   </Link>
-                  <Link href="/hizmet/parca-esya-tasimaciligi" className="block px-4 py-2 hover:bg-muted transition text-sm">
-                    Parça Eşya Taşımacılığı
-                  </Link>
-                  <Link href="/hizmet/sehir-ici-nakliyat" className="block px-4 py-2 hover:bg-muted transition text-sm">
-                    Şehir içi Nakliyat
-                  </Link>
-                  <Link href="/hizmet/sehirler-arasi-nakliyat" className="block px-4 py-2 hover:bg-muted transition text-sm">
-                    Şehirler Arası Nakliyat
+                  <Link href="/hizmet/parca-esya-depolama" className="block px-4 py-2 hover:bg-muted transition text-sm">
+                    Parça Eşya Depolama
                   </Link>
                 </div>
                 <div className="px-4 py-3 border-y border-border bg-muted/40">
-                  <p className="text-xs uppercase tracking-wide text-muted-foreground">Kurumsal Taşımacılık</p>
+                  <p className="text-xs uppercase tracking-wide text-muted-foreground">Kurumsal Depolama</p>
+                  <p className="text-sm text-muted-foreground">Ofis, arşiv ve doküman güvenliği</p>
                 </div>
                 <div className="py-1">
-                  <Link href="/hizmet/ofis-tasimaciligi" className="block px-4 py-2 hover:bg-muted transition text-sm">
-                    Ofis Taşımacılığı
+                  <Link href="/hizmet/ofis-esyasi-depolama" className="block px-4 py-2 hover:bg-muted transition text-sm">
+                    Ofis Eşyası Depolama
                   </Link>
-                  <Link href="/hizmet/kurumsal-tasimaciligi" className="block px-4 py-2 hover:bg-muted transition text-sm">
-                    Kurumsal Taşımacılık
+                  <Link href="/hizmet/buro-depolama" className="block px-4 py-2 hover:bg-muted transition text-sm">
+                    Büro Depolama
                   </Link>
-                  <Link href="/hizmet/fabrika-tasimaciligi" className="block px-4 py-2 hover:bg-muted transition text-sm">
-                    Fabrika Taşımacılığı
+                  <Link href="/hizmet/arsiv-depolama" className="block px-4 py-2 hover:bg-muted transition text-sm">
+                    Arşiv Depolama
                   </Link>
-                  <Link href="/hizmet/banka-tasimaciligi" className="block px-4 py-2 hover:bg-muted transition text-sm">
-                    Banka Taşımacılığı
-                  </Link>
-                  <Link href="/hizmet/fuar-tasimaciligi" className="block px-4 py-2 hover:bg-muted transition text-sm">
-                    Fuar Taşımacılığı
-                  </Link>
-                  <Link href="/hizmet/hastane-tasimaciligi" className="block px-4 py-2 hover:bg-muted transition text-sm">
-                    Hastane Taşımacılığı
+                  <Link href="/hizmet/evrak-depolama" className="block px-4 py-2 hover:bg-muted transition text-sm">
+                    Evrak Depolama
                   </Link>
                 </div>
                 <div className="px-4 py-3 border-t border-border">
-                  <p className="text-xs uppercase tracking-wide text-muted-foreground">Diğer Hizmetler</p>
+                  <p className="text-xs uppercase tracking-wide text-muted-foreground">Özel Paketler</p>
+                  <p className="text-sm text-muted-foreground">Esnek hacim ve hızlı teslim</p>
                 </div>
                 <div className="py-1">
-                  <Link href="/hizmet/konsolosluk-tasimaciligi" className="block px-4 py-2 hover:bg-muted transition text-sm">
-                    Konsolosluk Taşımacılığı
-                  </Link>
-                  <Link href="/hizmet/universite-tasimaciligi" className="block px-4 py-2 hover:bg-muted transition text-sm">
-                    Üniversite Taşımacılığı
-                  </Link>
-                  <Link href="/hizmet/arsiv-tasimaciligi" className="block px-4 py-2 hover:bg-muted transition text-sm">
-                    Arşiv Taşımacılığı
-                  </Link>
-                  <Link href="/hizmet/muze-tasimaciligi" className="block px-4 py-2 hover:bg-muted transition text-sm">
-                    Müze Taşımacılığı
-                  </Link>
-                  <Link href="/hizmet/bankamatik-tasimaciligi" className="block px-4 py-2 hover:bg-muted transition text-sm">
-                    Bankamatik Taşımacılığı
-                  </Link>
-                  <Link href="/hizmet/para-kasasi-tasimaciligi" className="block px-4 py-2 hover:bg-muted transition text-sm">
-                    Para Kasası Taşımacılığı
+                  <Link href="/hizmet/koli-depolama" className="block px-4 py-2 hover:bg-muted transition text-sm">
+                    Koli Depolama
                   </Link>
                 </div>
                 <div className="px-4 py-3 border-t border-border bg-muted/50">

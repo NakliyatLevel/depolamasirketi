@@ -53,17 +53,17 @@ export async function generateMetadata(): Promise<Metadata> {
 
 const featureDescriptionOverrides: Record<string, string> = {
   'Profesyonel Ekip':
-    'Deneyimli ve eğitimli personelimizle güvenli taşımacılık sunuyor, her odanın söküm-planlama sürecini önceden çıkarıp eşyaları numaralayarak taşıyoruz.',
+    'Depolama uzmanlarımız eşyaları kategori bazlı barkodlayıp klima kontrollü raflara yerleştirir, her kabini fotoğrafla belgeleyerek panelinize yükler ve teslim planını sizinle birlikte oluşturur.',
   'Güvenli Taşıma':
-    'Eşyalarınız özel paketleme malzemeleriyle korunur; nem, darbe ve çizilme risklerine karşı tüm parçaları çift kat streç, balonlu ambalaj ve tahta kasalarla güvence altına alırız.',
+    'Mobilya ve cihazlarınızı depoya almadan önce antibakteriyel kılıflarla sarıyor, nem bariyerli kasalara sabitliyor ve sensörlü alanlarda bekleterek çatlak, küf veya darbe riskini sıfırlıyoruz.',
   'Uygun Fiyat':
-    'Rekabetçi fiyatlarla kaliteli hizmet sağlıyor, bütçenizi aşmadan sigortalı taşıma ve şeffaf fiyatlandırma tabloları sunarak her kalemi açıklıyoruz.',
+    'Hacme göre öde modeliyle yalnızca kullandığınız metreküpe ödeme yapar, uzun dönem depolamalarda esnek sözleşme ve kombine paket indirimleriyle bütçenizi rahatlatırız.',
   'Sigortalı Hizmet':
-    'Tüm taşımalarımız sigorta kapsamındadır; poliçe numarası, teminat limitleri ve teslim sonrası raporlamayı taşıma öncesi yazılı olarak tarafınıza iletiyoruz.',
+    'Her sandık için sigorta poliçesi ve teminat limitlerini paylaşır, barkodlu hareket kayıtlarını poliçe numarasıyla eşleştirir ve hasar süreçlerini anlık raporlar hâline getiririz.',
   '7/24 Destek':
-    'Her zaman yanınızdayız; operasyon boyunca WhatsApp ve telefon üzerinden canlı bilgi vererek kesintisiz iletişim ve hızlı çözümler sağlarız.',
+    'Depolama panelimiz ve WhatsApp hattımız günün her saati açıktır; hangi kabinde ne kadar stok olduğunu canlı takip eder, acil teslim isteklerine dakikalar içinde dönüş yaparız.',
   'Zamanında Teslimat':
-    'Belirlenen tarih ve saatte teslimat garantisi veriyor, rota optimizasyonu ve canlı takip ile gecikmelere izin vermeden teslimatı tamamlıyoruz.',
+    'Teslim tarihlerinizi rota optimizasyonu ve slot planlamasıyla yönetir, sandıklarınızı tarife edilen saat aralıklarında adresinize ulaştırıp imzalı dijital tutanakla süreci kapatırız.',
 };
 
 function getFeatureDescription(featureTitle: string, fallback?: string) {
