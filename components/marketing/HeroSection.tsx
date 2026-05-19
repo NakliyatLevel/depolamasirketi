@@ -341,6 +341,13 @@ export default function HeroSection({ settings }: HeroSectionProps) {
                     <div className="mt-2 text-xs text-muted-foreground leading-relaxed">
                       Daha net fiyat için bilgilerinizi gönderin veya WhatsApp üzerinden paylaşın, ekibimiz size hızlıca dönüş yapsın.
                     </div>
+                    <div className="mt-4 rounded-lg border border-secondary/30 bg-secondary/10 px-3 py-2 text-left">
+                      <p className="text-xs font-semibold text-secondary uppercase tracking-wide">Sabit Uyarı</p>
+                      <p className="text-[0.78rem] text-foreground font-semibold">
+                        Evden Depoya Taşıma: 1+1 {`35.000 TL`} · 2+1 {`45.000 TL`} · 3+1 {`60.000 TL`}
+                      </p>
+                      <p className="text-sm text-secondary font-bold">Şehirlerarası taşımalar {`35.000 TL`}’den başlayan fiyatlarla!</p>
+                    </div>
                   </div>
                 )}
 
