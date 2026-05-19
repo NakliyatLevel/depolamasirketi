@@ -122,16 +122,16 @@ export default function HeroSection({ settings }: HeroSectionProps) {
 
             <div className="mt-6 space-y-3">
               <h1 className="text-[2.21rem] lg:text-[2.6rem] md:leading-[1] font-extrabold leading-[1.05] text-foreground">
-                Depolama <span className="text-secondary">Şirketi</span>
+                İstanbul&apos;un En İyi <span className="text-secondary">Depolama Şirketi</span>
               </h1>
 
-              <div className="text-[1.15rem] md:text-[1.45rem] font-semibold text-foreground">
+              <div className="text-[0.92rem] md:text-[1.16rem] font-semibold text-foreground">
                 Eşyalarınızı iklim kontrollü, 7/24 izlenen depolarda güvenle saklıyoruz.
               </div>
 
               <p className="text-base md:text-lg text-muted-foreground leading-relaxed max-w-2xl">
-                {cities[activeCity]} çıkışlı lojistik ağımızla teslim aldığımız eşyaları RFID etiketli modüllerimizde sigortalı olarak
-                depoluyor, süre uzatımı ve teslim planını tek panelden yönetmenizi sağlıyoruz.
+                Kurumsal ekiplerimizle eşyalarınızı adresinizden teslim alıyor, sigortalı depolarımızda modüler sistemlerle takip ediyor ve
+                istediğiniz anda aynı titizlikle geri teslim ediyoruz.
               </p>
             </div>
 
