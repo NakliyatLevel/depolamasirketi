@@ -126,7 +126,7 @@ export default function HeroSection({ settings }: HeroSectionProps) {
               </h1>
 
               <div className="text-[1.15rem] md:text-[1.45rem] font-semibold text-foreground">
-                Eşyalarınızı iklim kontrollü, 7/24 izlenen kasalarda güvenle saklıyoruz.
+                Eşyalarınızı iklim kontrollü, 7/24 izlenen depolarda güvenle saklıyoruz.
               </div>
 
               <p className="text-base md:text-lg text-muted-foreground leading-relaxed max-w-2xl">
