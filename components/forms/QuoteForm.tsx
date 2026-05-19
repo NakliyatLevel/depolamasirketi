@@ -19,8 +19,6 @@ interface FormData {
   toAddress: string
   toFloor: string
   toElevator: boolean
-  distance: string
-  propertyType: string
   
   // Eşya Listesi
   rooms: string
@@ -33,14 +31,13 @@ interface FormData {
   // Ek Hizmetler
   needsPacking: boolean
   needsDisassembly: boolean
-  needsStorage: boolean
   needsInsurance: boolean
   additionalNotes: string
 }
 
 const steps = [
   { id: 1, name: 'Kişisel Bilgiler', icon: User },
-  { id: 2, name: 'Taşınma Detayları', icon: MapPin },
+  { id: 2, name: 'Depolama Detayları', icon: MapPin },
   { id: 3, name: 'Eşya Listesi', icon: Package },
   { id: 4, name: 'Ek Hizmetler', icon: Settings },
   { id: 5, name: 'Özet & Gönder', icon: FileText },
@@ -60,8 +57,6 @@ export default function QuoteForm() {
     toAddress: '',
     toFloor: '0',
     toElevator: false,
-    distance: '',
-    propertyType: 'apartment',
     rooms: '1',
     furnitureCount: '',
     hasFragileItems: false,
@@ -70,7 +65,6 @@ export default function QuoteForm() {
     specialItems: '',
     needsPacking: false,
     needsDisassembly: false,
-    needsStorage: false,
     needsInsurance: false,
     additionalNotes: '',
   })
@@ -138,8 +132,6 @@ export default function QuoteForm() {
         toAddress: '',
         toFloor: '0',
         toElevator: false,
-        distance: '',
-        propertyType: 'apartment',
         rooms: '1',
         furnitureCount: '',
         hasFragileItems: false,
@@ -148,7 +140,6 @@ export default function QuoteForm() {
         specialItems: '',
         needsPacking: false,
         needsDisassembly: false,
-        needsStorage: false,
         needsInsurance: false,
         additionalNotes: '',
       })
@@ -277,7 +268,7 @@ export default function QuoteForm() {
             <div className="bg-muted/30 p-6 rounded-lg">
               <h3 className="font-semibold text-lg mb-4 flex items-center gap-2">
                 <MapPin className="w-5 h-5 text-primary" />
-                Nereden
+                Teslim Alınacak Adres
               </h3>
               <div className="space-y-4">
                 <div>
@@ -321,7 +312,7 @@ export default function QuoteForm() {
             <div className="bg-muted/30 p-6 rounded-lg">
               <h3 className="font-semibold text-lg mb-4 flex items-center gap-2">
                 <MapPin className="w-5 h-5 text-primary" />
-                Nereye
+                Depolama Adresi
               </h3>
               <div className="space-y-4">
                 <div>
@@ -362,31 +353,7 @@ export default function QuoteForm() {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <label className="block text-sm font-medium mb-2">Tahmini Mesafe (km)</label>
-                <input
-                  type="number"
-                  value={formData.distance}
-                  onChange={(e) => setFormData({ ...formData, distance: e.target.value })}
-                  className="w-full px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-                  placeholder="Örn: 25"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium mb-2">Konut Tipi</label>
-                <select
-                  value={formData.propertyType}
-                  onChange={(e) => setFormData({ ...formData, propertyType: e.target.value })}
-                  className="w-full px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-                >
-                  <option value="apartment">Daire</option>
-                  <option value="villa">Villa</option>
-                  <option value="office">Ofis</option>
-                  <option value="warehouse">Depo</option>
-                </select>
-              </div>
-            </div>
+
           </div>
         )}
 
@@ -470,7 +437,7 @@ export default function QuoteForm() {
         {/* Step 4: Ek Hizmetler */}
         {currentStep === 4 && (
           <div className="space-y-6 animate-fadeIn">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <label className="flex items-start gap-4 p-6 border-2 border-border rounded-lg cursor-pointer hover:border-primary transition">
                 <input
                   type="checkbox"
@@ -482,6 +449,7 @@ export default function QuoteForm() {
                   <div className="flex items-center gap-2 mb-2">
                     <Box className="w-5 h-5 text-primary" />
                     <span className="font-semibold">Paketleme Hizmeti</span>
+                    <span className="text-[0.65rem] font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-full">ÜCRETSİZ</span>
                   </div>
                   <p className="text-sm text-muted-foreground">
                     Profesyonel ekibimiz tüm eşyalarınızı paketler
@@ -500,27 +468,10 @@ export default function QuoteForm() {
                   <div className="flex items-center gap-2 mb-2">
                     <Settings className="w-5 h-5 text-primary" />
                     <span className="font-semibold">Montaj/Demontaj</span>
+                    <span className="text-[0.65rem] font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-full">ÜCRETSİZ</span>
                   </div>
                   <p className="text-sm text-muted-foreground">
                     Mobilyalarınızın sökme ve takma işlemi
-                  </p>
-                </div>
-              </label>
-
-              <label className="flex items-start gap-4 p-6 border-2 border-border rounded-lg cursor-pointer hover:border-primary transition">
-                <input
-                  type="checkbox"
-                  checked={formData.needsStorage}
-                  onChange={(e) => setFormData({ ...formData, needsStorage: e.target.checked })}
-                  className="w-5 h-5 mt-1"
-                />
-                <div>
-                  <div className="flex items-center gap-2 mb-2">
-                    <Building2 className="w-5 h-5 text-primary" />
-                    <span className="font-semibold">Depolama</span>
-                  </div>
-                  <p className="text-sm text-muted-foreground">
-                    Eşyalarınız için güvenli depolama alanı
                   </p>
                 </div>
               </label>
@@ -536,6 +487,7 @@ export default function QuoteForm() {
                   <div className="flex items-center gap-2 mb-2">
                     <Truck className="w-5 h-5 text-primary" />
                     <span className="font-semibold">Sigorta</span>
+                    <span className="text-[0.65rem] font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-full">ÜCRETSİZ</span>
                   </div>
                   <p className="text-sm text-muted-foreground">
                     Eşyalarınız için tam kapsamlı sigorta
@@ -580,13 +532,11 @@ export default function QuoteForm() {
                 <div className="bg-white p-4 rounded-lg">
                   <h4 className="font-semibold mb-2 flex items-center gap-2">
                     <MapPin className="w-4 h-4" />
-                    Taşınma Detayları
+                    Depolama Detayları
                   </h4>
                   <div className="text-sm space-y-1 text-muted-foreground">
-                    <p><strong>Nereden:</strong> {formData.fromAddress} ({formData.fromFloor}. Kat, {formData.fromElevator ? 'Asansör var' : 'Asansör yok'})</p>
-                    <p><strong>Nereye:</strong> {formData.toAddress} ({formData.toFloor}. Kat, {formData.toElevator ? 'Asansör var' : 'Asansör yok'})</p>
-                    {formData.distance && <p><strong>Mesafe:</strong> {formData.distance} km</p>}
-                    <p><strong>Konut Tipi:</strong> {formData.propertyType === 'apartment' ? 'Daire' : formData.propertyType === 'villa' ? 'Villa' : formData.propertyType === 'office' ? 'Ofis' : 'Depo'}</p>
+                    <p><strong>Teslim Alınacak Adres:</strong> {formData.fromAddress} ({formData.fromFloor}. Kat, {formData.fromElevator ? 'Asansör var' : 'Asansör yok'})</p>
+                    <p><strong>Depolama Adresi:</strong> {formData.toAddress} ({formData.toFloor}. Kat, {formData.toElevator ? 'Asansör var' : 'Asansör yok'})</p>
                   </div>
                 </div>
 
@@ -608,7 +558,7 @@ export default function QuoteForm() {
                   </div>
                 </div>
 
-                {(formData.needsPacking || formData.needsDisassembly || formData.needsStorage || formData.needsInsurance) && (
+                {(formData.needsPacking || formData.needsDisassembly || formData.needsInsurance) && (
                   <div className="bg-white p-4 rounded-lg">
                     <h4 className="font-semibold mb-2 flex items-center gap-2">
                       <Settings className="w-4 h-4" />
@@ -618,7 +568,6 @@ export default function QuoteForm() {
                       <p>{[
                         formData.needsPacking && 'Paketleme',
                         formData.needsDisassembly && 'Montaj/Demontaj',
-                        formData.needsStorage && 'Depolama',
                         formData.needsInsurance && 'Sigorta'
                       ].filter(Boolean).join(', ')}</p>
                     </div>
