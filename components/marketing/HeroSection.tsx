@@ -295,7 +295,7 @@ export default function HeroSection({ settings }: HeroSectionProps) {
                       >
                         <span className="block text-sm font-semibold">{option.label}</span>
                         <span
-                          className={`mt-0.5 inline-flex items-center justify-center px-2 py-0.5 text-[0.65rem] font-semibold rounded-full transition-colors ${
+                          className={`mt-0.5 inline-flex items-center justify-center px-1.5 py-0.5 text-[0.65rem] font-semibold rounded-full transition-colors shadow-sm ${
                             heroForm.roomType === option.value
                               ? 'bg-white/20 text-white'
                               : 'bg-muted text-muted-foreground'
