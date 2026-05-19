@@ -126,13 +126,13 @@ export default function Header({ settings }: HeaderProps) {
                   Ücretsiz Ekspertiz
                 </Link>
                 <Link href="/cozum/sozlesmeli-nakliyat" className="block px-4 py-3 hover:bg-muted transition text-sm">
-                  Sözleşmeli Evden Eve Nakliyat
+                  Sözleşmeli Ev Taşıma
                 </Link>
                 <Link href="/cozum/sigortali-nakliyat" className="block px-4 py-3 hover:bg-muted transition text-sm">
                   Sigortalı Evden Eve Nakliyat
                 </Link>
                 <Link href="/cozum/asansorlu-nakliyat" className="block px-4 py-3 hover:bg-muted transition text-sm">
-                  Asansörlü Evden Eve Nakliyat
+                  Asansörlü Nakliyat
                 </Link>
                 <Link href="/cozum/ambalaj-paketleme" className="block px-4 py-3 hover:bg-muted transition text-sm">
                   Ambalaj ve Paketleme

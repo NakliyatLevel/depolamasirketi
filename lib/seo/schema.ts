@@ -23,11 +23,25 @@ export async function generateLocalBusinessSchema() {
   }
 }
 
-export function generateReviewSchema(reviews: any[]) {
+export function generateReviewSchema(reviews: any[], settings?: Record<string, any>) {
+  if (!reviews?.length) {
+    return null
+  }
+
+  const averageRating = reviews.reduce((total, review) => total + review.rating, 0) / reviews.length
+
   return {
     '@context': 'https://schema.org',
-    '@type': 'ItemList',
-    itemListElement: reviews.map((review, index) => ({
+    '@type': 'MovingCompany',
+    name: settings?.company_name || settings?.site_title || 'Depolama Şirketi',
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: Number(averageRating.toFixed(1)),
+      reviewCount: reviews.length,
+      bestRating: 5,
+      worstRating: 1,
+    },
+    review: reviews.map((review, index) => ({
       '@type': 'Review',
       position: index + 1,
       author: {

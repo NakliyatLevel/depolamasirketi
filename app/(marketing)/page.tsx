@@ -254,7 +254,8 @@ export default async function HomePage() {
   const phoneDisplay = formatPhoneDisplay(settings.phone)
 
   const businessSchema = await generateLocalBusinessSchema()
-  const reviewSchema = reviews.length > 0 ? generateReviewSchema(reviews) : null
+  const averageRating = reviews.length > 0 ? reviews.reduce((total, review) => total + review.rating, 0) / reviews.length : null
+  const reviewSchema = reviews.length > 0 ? generateReviewSchema(reviews, settings) : null
 
   return (
     <>
@@ -394,10 +395,19 @@ export default async function HomePage() {
       )}
 
       {/* Reviews Section */}
-      {reviews.length > 0 && (
+      {reviews.length > 0 && averageRating && (
         <section className="py-16">
           <div className="container mx-auto px-4 max-w-7xl">
             <h2 className="text-3xl font-bold text-center mb-12">Müşteri Yorumları</h2>
+            <div className="text-center mb-10">
+              <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-primary/5 border border-primary/10">
+                <div className="flex items-center gap-2 text-primary text-3xl font-bold">
+                  <Star className="w-7 h-7 text-primary fill-primary" />
+                  {averageRating.toFixed(1)} / 5
+                </div>
+                <span className="text-sm text-muted-foreground">{reviews.length} onaylı müşteri yorumu</span>
+              </div>
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {reviews.map((review) => (
                 <div key={review.id} className="bg-white p-6 rounded-lg border border-gray-200">

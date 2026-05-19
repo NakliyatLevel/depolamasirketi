@@ -1,9 +1,29 @@
 import Link from 'next/link'
 import { getSiteSettings } from '@/lib/settings'
 import { Phone, Mail, MapPin, Facebook, Instagram, Twitter, MessageCircle } from 'lucide-react'
+import { prisma } from '@/lib/db'
 
 export default async function Footer() {
-  const settings = await getSiteSettings()
+  const [settings, services] = await Promise.all([
+    getSiteSettings(),
+    prisma.service.findMany({
+      where: { active: true, showOnHomepage: true },
+      orderBy: { order: 'asc' },
+      take: 5,
+    }),
+  ])
+
+  const fallbackServices = [
+    { label: 'Ev Taşıma', href: '/hizmet/ev-tasima' },
+    { label: 'Villa Taşımacılığı', href: '/hizmet/villa-tasimaciligi' },
+    { label: 'Parça Eşya Taşımacılığı', href: '/hizmet/parca-esya-tasimaciligi' },
+    { label: 'Şehir içi Nakliyat', href: '/hizmet/sehir-ici-nakliyat' },
+    { label: 'Şehirler Arası Nakliyat', href: '/hizmet/sehirlerarasi-nakliyat' },
+  ]
+
+  const serviceLinks = services.length > 0
+    ? services.map((service) => ({ label: service.name, href: `/hizmet/${service.slug}` }))
+    : fallbackServices
 
   return (
     <footer className="bg-foreground text-white">
@@ -61,13 +81,7 @@ export default async function Footer() {
           <div>
             <h4 className="font-semibold mb-4 text-white text-sm uppercase tracking-wider">Hizmetlerimiz</h4>
             <ul className="space-y-2.5">
-              {[
-                { label: 'Ev Taşıma', href: '/hizmet/ev-tasima' },
-                { label: 'Villa Taşımacılığı', href: '/hizmet/villa-tasimaciligi' },
-                { label: 'Parça Eşya Taşımacılığı', href: '/hizmet/parca-esya-tasimaciligi' },
-                { label: 'Şehir içi Nakliyat', href: '/hizmet/sehir-ici-nakliyat' },
-                { label: 'Şehirler Arası Nakliyat', href: '/hizmet/sehirlerarasi-nakliyat' },
-              ].map((item) => (
+              {serviceLinks.map((item) => (
                 <li key={item.href}>
                   <Link href={item.href} className="text-white/70 hover:text-white text-sm transition">
                     {item.label}
