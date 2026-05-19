@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
-import { ChevronRight, ChevronLeft, Check, User, MapPin, Package, Settings, FileText, Phone, Mail, Calendar, Home, Building2, Truck, Box } from 'lucide-react'
+import { ChevronRight, ChevronLeft, Check, User, MapPin, Package, Settings, FileText, Phone, Mail, Calendar, Home, Building2, Truck, Box, MessageCircle } from 'lucide-react'
 import { toast } from 'sonner'
 
 interface FormData {
@@ -43,6 +43,8 @@ const steps = [
 export default function QuoteForm() {
   const [currentStep, setCurrentStep] = useState(1)
   const [loading, setLoading] = useState(false)
+  const [submitted, setSubmitted] = useState(false)
+  const [submittedData, setSubmittedData] = useState<FormData | null>(null)
   const [formData, setFormData] = useState<FormData>({
     fullName: '',
     phone: '',
@@ -114,32 +116,103 @@ export default function QuoteForm() {
 
       toast.success('Teklif talebiniz alındı! En kısa sürede size dönüş yapacağız.')
       
-      // Form sıfırlama
-      setFormData({
-        fullName: '',
-        phone: '',
-        email: '',
-        preferredDate: '',
-        fromAddress: '',
-        fromFloor: '0',
-        fromElevator: false,
-        rooms: '1',
-        furnitureCount: '',
-        hasFragileItems: false,
-        hasPiano: false,
-        hasAntiques: false,
-        specialItems: '',
-        needsPacking: false,
-        needsDisassembly: false,
-        needsInsurance: false,
-        additionalNotes: '',
-      })
-      setCurrentStep(1)
+      setSubmitted(true)
+      setSubmittedData(formData)
     } catch (error) {
       toast.error('Bir hata oluştu, lütfen tekrar deneyin')
     } finally {
       setLoading(false)
     }
+  }
+
+  if (submitted && submittedData) {
+    return (
+      <div className="bg-white rounded-2xl shadow-2xl overflow-hidden">
+        <div className="bg-gradient-to-r from-emerald-600 to-emerald-700 p-8">
+          <div className="text-center space-y-4">
+            <div className="inline-flex items-center justify-center w-16 h-16 bg-white rounded-full">
+              <Check className="w-8 h-8 text-emerald-600" />
+            </div>
+            <h2 className="text-3xl font-bold text-white">Teklif Talebiniz Alındı!</h2>
+            <p className="text-emerald-50 text-lg">En kısa sürede sizinle iletişime geçeceğiz</p>
+          </div>
+        </div>
+
+        <div className="p-8 space-y-6">
+          <div className="bg-emerald-50 border-2 border-emerald-200 p-6 rounded-lg">
+            <h3 className="font-semibold text-emerald-900 mb-4">Talebinizin Özeti</h3>
+            <div className="space-y-3 text-sm text-emerald-800">
+              <p><strong>Ad Soyad:</strong> {submittedData.fullName}</p>
+              <p><strong>Telefon:</strong> {submittedData.phone}</p>
+              <p><strong>Email:</strong> {submittedData.email}</p>
+              <p><strong>Teslim Alınacak Adres:</strong> {submittedData.fromAddress}</p>
+            </div>
+          </div>
+
+          <div className="border-t pt-6">
+            <p className="text-sm text-muted-foreground mb-6">
+              Hızlı iletişim için aşağıdaki seçeneklerden birini kullanabilirsiniz:
+            </p>
+            
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <a
+                href={`tel:${submittedData.phone}`}
+                className="flex items-center justify-center gap-3 px-6 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold transition"
+              >
+                <Phone className="w-5 h-5" />
+                Telefon Ara
+              </a>
+              
+              <a
+                href={`https://wa.me/${submittedData.phone.replace(/\s/g, '')}?text=Merhaba, teklif talebim hakkında bilgi almak istiyorum.`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-3 px-6 py-4 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-semibold transition"
+              >
+                <MessageCircle className="w-5 h-5" />
+                WhatsApp Gönder
+              </a>
+            </div>
+          </div>
+
+          <div className="bg-yellow-50 border border-yellow-200 p-4 rounded-lg">
+            <p className="text-sm text-yellow-800">
+              <strong>Not:</strong> Talebiniz başarıyla kaydedildi. Ekibimiz en kısa sürede sizinle iletişime geçecektir.
+            </p>
+          </div>
+
+          <button
+            onClick={() => {
+              setSubmitted(false)
+              setSubmittedData(null)
+              setCurrentStep(1)
+              setFormData({
+                fullName: '',
+                phone: '',
+                email: '',
+                preferredDate: '',
+                fromAddress: '',
+                fromFloor: '0',
+                fromElevator: false,
+                rooms: '1',
+                furnitureCount: '',
+                hasFragileItems: false,
+                hasPiano: false,
+                hasAntiques: false,
+                specialItems: '',
+                needsPacking: false,
+                needsDisassembly: false,
+                needsInsurance: false,
+                additionalNotes: '',
+              })
+            }}
+            className="w-full px-6 py-3 border-2 border-primary text-primary hover:bg-primary/5 rounded-lg font-semibold transition"
+          >
+            Yeni Teklif Talebi Oluştur
+          </button>
+        </div>
+      </div>
+    )
   }
 
   return (

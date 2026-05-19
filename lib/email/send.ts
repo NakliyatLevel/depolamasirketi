@@ -57,7 +57,7 @@ export async function sendContactEmail(data: {
 
   return await sendEmail({
     to: (await prisma.siteSetting.findUnique({ where: { key: 'smtp_to' }, select: { value: true } }))?.value || process.env.SMTP_USER || '',
-    subject: `Yeni İletişim Formu - ${data.name}`,
+    subject: `Form - depolamasirketi.com.tr - İletişim`,
     html,
   })
 }
@@ -86,7 +86,7 @@ export async function sendQuoteEmail(data: {
 
   return await sendEmail({
     to: (await prisma.siteSetting.findUnique({ where: { key: 'smtp_to' }, select: { value: true } }))?.value || process.env.SMTP_USER || '',
-    subject: `Yeni Teklif Talebi - ${data.name}`,
+    subject: `Form - depolamasirketi.com.tr - Teklif`,
     html,
   })
 }
@@ -117,7 +117,7 @@ export async function sendHeroQuickQuoteEmail(data: {
 
   return await sendEmail({
     to: (await prisma.siteSetting.findUnique({ where: { key: 'smtp_to' }, select: { value: true } }))?.value || process.env.SMTP_USER || '',
-    subject: `Hero Teklif Talebi - ${data.fullName}`,
+    subject: `Form - depolamasirketi.com.tr - Hızlı Teklif`,
     html,
   })
 }
