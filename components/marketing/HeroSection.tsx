@@ -287,7 +287,7 @@ export default function HeroSection({ settings }: HeroSectionProps) {
                         type="button"
                         onClick={() => setHeroForm((p) => ({ ...p, roomType: option.value }))}
                         className={
-                          `h-14 rounded-lg border text-sm font-medium transition-colors flex flex-col justify-center ` +
+                          `h-16 rounded-lg border text-sm font-medium transition-colors flex flex-col justify-center ` +
                           (heroForm.roomType === option.value
                             ? 'bg-primary text-primary-foreground border-primary'
                             : 'bg-white text-foreground border-border hover:bg-muted/60')
