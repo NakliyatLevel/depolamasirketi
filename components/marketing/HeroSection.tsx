@@ -30,9 +30,9 @@ export default function HeroSection({ settings }: HeroSectionProps) {
 
   const cities = ['İstanbul', 'Ankara', 'İzmir', 'Bursa', 'Antalya']
   const heroRoomOptions = [
-    { value: '1+1', label: '1+1 - 15 m³' },
-    { value: '2+1', label: '2+1 - 20 m³' },
-    { value: '3+1', label: '3+1 - 25 m³' },
+    { value: '1+1', label: '1+1', volume: '15 m³' },
+    { value: '2+1', label: '2+1', volume: '20 m³' },
+    { value: '3+1', label: '3+1', volume: '25 m³' },
   ]
 
   useEffect(() => {
@@ -293,7 +293,8 @@ export default function HeroSection({ settings }: HeroSectionProps) {
                             : 'bg-white text-foreground border-border hover:bg-muted')
                         }
                       >
-                        {option.label}
+                        <span className="block text-sm font-semibold">{option.label}</span>
+                        <span className="block text-xs text-muted-foreground">{option.volume}</span>
                       </button>
                     ))}
                   </div>
