@@ -30,9 +30,8 @@ function getSiteUrl(raw?: string | null): string {
 
 function buildBusinessBase(settings: SettingsMap = {}) {
   const siteUrl = getSiteUrl(settings.domain)
-  const resolvedLogo = settings.logo_url
-    ? (settings.logo_url.startsWith('http') ? settings.logo_url : `${siteUrl.replace(/\/$/, '')}${settings.logo_url}`)
-    : undefined
+  const logoPath = settings.logo_url && settings.logo_url.trim().length > 0 ? settings.logo_url : '/logo.webp'
+  const resolvedLogo = logoPath.startsWith('http') ? logoPath : `${siteUrl.replace(/\/$/, '')}${logoPath}`
 
   let address: PostalAddress | undefined
   if (settings.address) {
@@ -59,12 +58,10 @@ function buildBusinessBase(settings: SettingsMap = {}) {
     telephone: settings.phone,
     email: settings.email,
     image: resolvedLogo,
-    logo: resolvedLogo
-      ? {
-          '@type': 'ImageObject',
-          url: resolvedLogo,
-        }
-      : undefined,
+    logo: {
+      '@type': 'ImageObject',
+      url: resolvedLogo,
+    },
     priceRange: settings.price_range || '$$',
     address,
     areaServed: {
