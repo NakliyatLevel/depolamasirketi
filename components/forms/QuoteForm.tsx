@@ -16,9 +16,6 @@ interface FormData {
   fromAddress: string
   fromFloor: string
   fromElevator: boolean
-  toAddress: string
-  toFloor: string
-  toElevator: boolean
   
   // Eşya Listesi
   rooms: string
@@ -54,9 +51,6 @@ export default function QuoteForm() {
     fromAddress: '',
     fromFloor: '0',
     fromElevator: false,
-    toAddress: '',
-    toFloor: '0',
-    toElevator: false,
     rooms: '1',
     furnitureCount: '',
     hasFragileItems: false,
@@ -92,8 +86,8 @@ export default function QuoteForm() {
         }
         break
       case 2:
-        if (!formData.fromAddress || !formData.toAddress) {
-          toast.error('Lütfen nereden ve nereye adreslerini girin')
+        if (!formData.fromAddress) {
+          toast.error('Lütfen teslim alınacak adresi girin')
           return false
         }
         break
@@ -129,9 +123,6 @@ export default function QuoteForm() {
         fromAddress: '',
         fromFloor: '0',
         fromElevator: false,
-        toAddress: '',
-        toFloor: '0',
-        toElevator: false,
         rooms: '1',
         furnitureCount: '',
         hasFragileItems: false,
@@ -308,51 +299,6 @@ export default function QuoteForm() {
                 </div>
               </div>
             </div>
-
-            <div className="bg-muted/30 p-6 rounded-lg">
-              <h3 className="font-semibold text-lg mb-4 flex items-center gap-2">
-                <MapPin className="w-5 h-5 text-primary" />
-                Depolama Adresi
-              </h3>
-              <div className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium mb-2">Adres *</label>
-                  <input
-                    type="text"
-                    value={formData.toAddress}
-                    onChange={(e) => setFormData({ ...formData, toAddress: e.target.value })}
-                    className="w-full px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-                    placeholder="Yeni adresiniz"
-                  />
-                </div>
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-medium mb-2">Kat</label>
-                    <select
-                      value={formData.toFloor}
-                      onChange={(e) => setFormData({ ...formData, toFloor: e.target.value })}
-                      className="w-full px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-                    >
-                      {[...Array(21)].map((_, i) => (
-                        <option key={i} value={i}>{i === 0 ? 'Zemin' : `${i}. Kat`}</option>
-                      ))}
-                    </select>
-                  </div>
-                  <div className="flex items-end">
-                    <label className="flex items-center gap-2 cursor-pointer">
-                      <input
-                        type="checkbox"
-                        checked={formData.toElevator}
-                        onChange={(e) => setFormData({ ...formData, toElevator: e.target.checked })}
-                        className="w-5 h-5"
-                      />
-                      <span className="text-sm font-medium">Asansör var</span>
-                    </label>
-                  </div>
-                </div>
-              </div>
-            </div>
-
 
           </div>
         )}
@@ -532,11 +478,10 @@ export default function QuoteForm() {
                 <div className="bg-white p-4 rounded-lg">
                   <h4 className="font-semibold mb-2 flex items-center gap-2">
                     <MapPin className="w-4 h-4" />
-                    Depolama Detayları
+                    Teslimat Detayı
                   </h4>
                   <div className="text-sm space-y-1 text-muted-foreground">
                     <p><strong>Teslim Alınacak Adres:</strong> {formData.fromAddress} ({formData.fromFloor}. Kat, {formData.fromElevator ? 'Asansör var' : 'Asansör yok'})</p>
-                    <p><strong>Depolama Adresi:</strong> {formData.toAddress} ({formData.toFloor}. Kat, {formData.toElevator ? 'Asansör var' : 'Asansör yok'})</p>
                   </div>
                 </div>
 
