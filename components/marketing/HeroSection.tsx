@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import {
   ShieldCheck,
-  Award,
   MapPin,
   Instagram,
   ArrowRight,
@@ -12,10 +11,15 @@ import {
   FileText,
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-export default function HeroSection() {
-  const [mounted, setMounted] = useState(false)
+
+type SettingsMap = Record<string, string | number | null | undefined>
+
+interface HeroSectionProps {
+  settings: SettingsMap
+}
+
+export default function HeroSection({ settings }: HeroSectionProps) {
   const [activeCity, setActiveCity] = useState(0)
-  const [settings, setSettings] = useState<any>({})
   const [heroForm, setHeroForm] = useState({
     fromCity: '',
     toCity: '',
@@ -29,15 +33,6 @@ export default function HeroSection() {
   const cities = ['İstanbul', 'Ankara', 'İzmir', 'Bursa', 'Antalya']
 
   useEffect(() => {
-    setMounted(true)
-    
-    fetch('/api/settings')
-      .then((res) => res.json())
-      .then((data) => {
-        setSettings(data)
-      })
-      .catch(() => {})
-
     const cityTimer = setInterval(() => {
       setActiveCity(prev => (prev + 1) % cities.length)
     }, 3000)
@@ -46,8 +41,6 @@ export default function HeroSection() {
       clearInterval(cityTimer)
     }
   }, [cities.length])
-
-  if (!mounted) return null
 
   const isHeroPriceReady =
     Boolean(heroForm.fromCity.trim()) &&
@@ -162,6 +155,7 @@ export default function HeroSection() {
                             height={414}
                             priority
                             className="w-full h-auto"
+                            sizes="(min-width: 768px) 180px, 120px"
                           />
                         </div>
                       </div>

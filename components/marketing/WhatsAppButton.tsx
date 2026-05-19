@@ -1,23 +1,15 @@
-'use client'
-
-import { useEffect, useState } from 'react'
 import { MessageCircle } from 'lucide-react'
 
-export function WhatsAppButton() {
-  const [whatsapp, setWhatsapp] = useState<string | null>(null)
+interface WhatsAppButtonProps {
+  whatsapp?: string | null
+}
 
-  useEffect(() => {
-    fetch('/api/settings')
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.whatsapp) setWhatsapp(data.whatsapp)
-      })
-      .catch(() => {})
-  }, [])
-
+export function WhatsAppButton({ whatsapp }: WhatsAppButtonProps) {
   if (!whatsapp) return null
 
   const whatsappNumber = whatsapp.replace(/[^0-9]/g, '')
+  if (!whatsappNumber) return null
+
   const whatsappUrl = `https://wa.me/${whatsappNumber}`
 
   return (

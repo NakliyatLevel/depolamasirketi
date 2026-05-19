@@ -1,22 +1,10 @@
-'use client'
-
-import { useEffect, useState } from 'react'
 import { Clock, Shield, MessageCircle } from 'lucide-react'
 
-export default function TrustBar() {
-  const [whatsapp, setWhatsapp] = useState<string | null>(null)
+interface TrustBarProps {
+  whatsapp?: string | null
+}
 
-  useEffect(() => {
-    fetch('/api/settings')
-      .then((res) => res.json())
-      .then((data) => {
-        if (data?.whatsapp) {
-          setWhatsapp(data.whatsapp as string)
-        }
-      })
-      .catch(() => {})
-  }, [])
-
+export default function TrustBar({ whatsapp }: TrustBarProps) {
   const whatsappNumber = whatsapp?.toString().replace(/[^0-9]/g, '')
   const whatsappUrl = whatsappNumber ? `https://wa.me/${whatsappNumber}` : null
 

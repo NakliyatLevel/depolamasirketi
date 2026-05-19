@@ -1,39 +1,30 @@
-'use client'
-
-import { useEffect, useState } from 'react'
 import { Phone, MessageCircle } from 'lucide-react'
 
-export function MobileBottomBar() {
-  const [phone, setPhone] = useState<string | null>(null)
-  const [whatsapp, setWhatsapp] = useState<string | null>(null)
+interface MobileBottomBarProps {
+  phone?: string | null
+  whatsapp?: string | null
+}
 
-  useEffect(() => {
-    fetch('/api/settings')
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.phone) setPhone(data.phone)
-        if (data.whatsapp) setWhatsapp(data.whatsapp)
-      })
-      .catch(() => {})
-  }, [])
-
-  if (!phone && !whatsapp) return null
-
+export function MobileBottomBar({ phone, whatsapp }: MobileBottomBarProps) {
+  const sanitizedPhone = phone?.replace(/[^0-9+]/g, '')
   const whatsappNumber = whatsapp?.replace(/[^0-9]/g, '')
-  const whatsappUrl = `https://wa.me/${whatsappNumber}`
+
+  if (!sanitizedPhone && !whatsappNumber) return null
+
+  const whatsappUrl = whatsappNumber ? `https://wa.me/${whatsappNumber}` : null
 
   return (
     <div className="fixed bottom-0 left-0 right-0 z-50 flex md:hidden border-t border-gray-200 bg-white shadow-[0_-4px_16px_rgba(0,0,0,0.08)]">
-      {phone && (
+      {sanitizedPhone && (
         <a
-          href={`tel:${phone}`}
+          href={`tel:${sanitizedPhone}`}
           className="flex flex-1 items-center justify-center gap-2 py-4 bg-primary text-white font-semibold text-sm active:opacity-90 transition"
         >
           <Phone className="w-5 h-5" />
-          <span>Telefon</span>
+          <span>{phone || 'Telefon'}</span>
         </a>
       )}
-      {whatsapp && (
+      {whatsappUrl && (
         <a
           href={whatsappUrl}
           target="_blank"

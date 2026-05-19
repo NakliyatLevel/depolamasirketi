@@ -5,20 +5,16 @@ import Image from 'next/image'
 import { Phone, Mail, Menu, ChevronDown, Facebook, Instagram, Twitter, Linkedin, Youtube } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { MobileMenu } from './MobileMenu'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 
-export default function Header() {
-  const [settings, setSettings] = useState<any>({})
+type SettingsMap = Record<string, string | null | undefined>
+
+interface HeaderProps {
+  settings: SettingsMap
+}
+
+export default function Header({ settings }: HeaderProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-
-  useEffect(() => {
-    fetch('/api/settings')
-      .then((res) => res.json())
-      .then((data) => {
-        setSettings(data)
-      })
-      .catch(() => {})
-  }, [])
 
   return (
     <>
