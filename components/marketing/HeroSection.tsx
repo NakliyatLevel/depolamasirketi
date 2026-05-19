@@ -287,14 +287,22 @@ export default function HeroSection({ settings }: HeroSectionProps) {
                         type="button"
                         onClick={() => setHeroForm((p) => ({ ...p, roomType: option.value }))}
                         className={
-                          `h-10 rounded-md border text-sm font-medium transition-colors ` +
+                          `h-14 rounded-lg border text-sm font-medium transition-colors flex flex-col justify-center ` +
                           (heroForm.roomType === option.value
                             ? 'bg-primary text-primary-foreground border-primary'
-                            : 'bg-white text-foreground border-border hover:bg-muted')
+                            : 'bg-white text-foreground border-border hover:bg-muted/60')
                         }
                       >
                         <span className="block text-sm font-semibold">{option.label}</span>
-                        <span className="block text-xs text-muted-foreground">{option.volume}</span>
+                        <span
+                          className={`mt-0.5 inline-flex items-center justify-center px-2 py-0.5 text-[0.65rem] font-semibold rounded-full transition-colors ${
+                            heroForm.roomType === option.value
+                              ? 'bg-white/20 text-white'
+                              : 'bg-muted text-muted-foreground'
+                          }`}
+                        >
+                          {option.volume}
+                        </span>
                       </button>
                     ))}
                   </div>
