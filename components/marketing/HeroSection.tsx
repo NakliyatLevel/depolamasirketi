@@ -272,22 +272,41 @@ export default function HeroSection({ settings }: HeroSectionProps) {
               <form onSubmit={handleHeroSubmit} className="mt-6 space-y-4 flex-1">
                 <div>
                   <label className="block text-sm font-medium text-foreground mb-2">Ev Tipi</label>
-                  <div className="grid grid-cols-5 gap-2">
-                    {['1+0', '1+1', '2+1', '3+1', '4+1'].map((t) => (
-                      <button
-                        key={t}
-                        type="button"
-                        onClick={() => setHeroForm((p) => ({ ...p, roomType: t }))}
-                        className={
-                          `h-10 rounded-md border text-sm font-medium transition-colors ` +
-                          (heroForm.roomType === t
-                            ? 'bg-primary text-primary-foreground border-primary'
-                            : 'bg-white text-foreground border-border hover:bg-muted')
-                        }
-                      >
-                        {t}
-                      </button>
-                    ))}
+                  <div className="space-y-2">
+                    <div className="grid grid-cols-3 gap-2">
+                      {['1+0', '1+1', '2+1'].map((t) => (
+                        <button
+                          key={t}
+                          type="button"
+                          onClick={() => setHeroForm((p) => ({ ...p, roomType: t }))}
+                          className={
+                            `h-10 rounded-md border text-sm font-medium transition-colors ` +
+                            (heroForm.roomType === t
+                              ? 'bg-primary text-primary-foreground border-primary'
+                              : 'bg-white text-foreground border-border hover:bg-muted')
+                          }
+                        >
+                          {t}
+                        </button>
+                      ))}
+                    </div>
+                    <div className="grid grid-cols-2 gap-2">
+                      {['3+1', '4+1'].map((t) => (
+                        <button
+                          key={t}
+                          type="button"
+                          onClick={() => setHeroForm((p) => ({ ...p, roomType: t }))}
+                          className={
+                            `h-10 rounded-md border text-sm font-medium transition-colors ` +
+                            (heroForm.roomType === t
+                              ? 'bg-primary text-primary-foreground border-primary'
+                              : 'bg-white text-foreground border-border hover:bg-muted')
+                          }
+                        >
+                          {t}
+                        </button>
+                      ))}
+                    </div>
                   </div>
                 </div>
 
